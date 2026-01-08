@@ -1,4 +1,4 @@
-import type { EcLevel, Version } from "./types";
+import type { EcLevel, Version } from "./types.ts";
 
 /** Gets the width of the QR code in modules */
 export function versionWidth(version: Version): number {

@@ -1,5 +1,5 @@
-import type { Version } from "./types";
-import { Mode } from "./types";
+import type { Version } from "./types.ts";
+import { Mode } from "./types.ts";
 
 /** Computes the number of bits needed to encode the data length */
 export function modeLengthBitsCount(mode: Mode, version: Version): number {

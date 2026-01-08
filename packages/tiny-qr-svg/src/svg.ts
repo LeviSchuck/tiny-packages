@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import { toSvgString } from './index';
+import { toSvgString } from './index.ts';
 import { qrCode } from '@levischuck/tiny-qr';
 
 // This is a simple CLI for testing QR code SVG generation

@@ -1,6 +1,6 @@
-import { concat } from "./bytes";
-import { deflate } from "./compress";
-import { pngChunk } from "./pngBytes";
+import { concat } from "./bytes.ts";
+import { deflate } from "./compress.ts";
+import { pngChunk } from "./pngBytes.ts";
 
 export async function indexedPng(
   input: Uint8Array,

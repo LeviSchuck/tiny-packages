@@ -27,16 +27,46 @@ fi
 
 cd "$PACKAGE_DIR"
 
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "Error: jq is required but not installed"
+  exit 1
+fi
+
+# Get local version from package.json
+LOCAL_VERSION=$(jq -r '.version' package.json)
+if [ -z "$LOCAL_VERSION" ] || [ "$LOCAL_VERSION" = "null" ]; then
+  echo "Error: Could not read version from package.json"
+  exit 1
+fi
+
+echo "Local version: $LOCAL_VERSION"
+
+# Get published version from npm
+NPM_PACKAGE_NAME=$(jq -r '.name' package.json)
+NPM_VERSION=$(bun info "$NPM_PACKAGE_NAME" version 2>/dev/null || echo "not-published")
+
+if [ "$NPM_VERSION" = "not-published" ]; then
+  echo "Package not yet published to npm"
+else
+  echo "NPM version: $NPM_VERSION"
+
+  if [ "$LOCAL_VERSION" = "$NPM_VERSION" ]; then
+    echo "Version $LOCAL_VERSION is already published to npm. Skipping publish."
+    exit 0
+  fi
+fi
+
 # Build the package (prepublishOnly will also build, but this ensures dry-run works)
-echo "Building $PACKAGE_NAME..."
+echo "Building $NPM_PACKAGE_NAME..."
 bun run build
 
 if [ "$DRY_RUN" = "--dry-run" ]; then
-  echo "Running npm publish --dry-run for $PACKAGE_NAME..."
+  echo "Running npm publish --dry-run for $NPM_PACKAGE_NAME..."
   # For dry-run, we need to build manually since prepublishOnly doesn't run
   bun publish --dry-run
 else
-  echo "Publishing $PACKAGE_NAME to npm..."
+  echo "Publishing $NPM_PACKAGE_NAME to npm (version $LOCAL_VERSION)..."
   # prepublishOnly will build again, but that's fine as a safety check
   bun publish
 fi

@@ -1,4 +1,4 @@
-import { crc32 } from "./crc";
+import { crc32 } from "./crc.ts";
 const ENCODER = new TextEncoder();
 
 export function pngChunk(type: string, data: Uint8Array): Uint8Array {

@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import { toPng } from './index';
+import { toPng } from './index.ts';
 import { qrCode } from '@levischuck/tiny-qr';
 
 // This is a simple CLI for testing QR code PNG generation

@@ -3,22 +3,50 @@
     "packages/tiny-png": {
       "component": "tiny-png",
       "release-type": "node",
-      "changelog-path": "tiny-png/CHANGELOG.md"
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "jsr.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     "packages/tiny-qr": {
       "component": "tiny-qr",
       "release-type": "node",
-      "changelog-path": "tiny-qr/CHANGELOG.md"
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "jsr.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     "packages/tiny-qr-png": {
       "component": "tiny-qr-png",
       "release-type": "node",
-      "changelog-path": "tiny-qr-png/CHANGELOG.md"
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "jsr.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     "packages/tiny-qr-svg": {
       "component": "tiny-qr-svg",
       "release-type": "node",
-      "changelog-path": "tiny-qr-svg/CHANGELOG.md"
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "jsr.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     ".": {
       "bump-minor-pre-major": false,

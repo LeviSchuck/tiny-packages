@@ -32,13 +32,6 @@ for PACKAGE in "${PACKAGES[@]}"; do
     "$SCRIPT_DIR/publish-npm.sh" "$PACKAGE"
   fi
   
-  # Publish to JSR
-  # if [ "$DRY_RUN" = "--dry-run" ]; then
-  #   "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE" --dry-run
-  # else
-  #   "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE"
-  # fi
-  
   echo ""
 done
 
