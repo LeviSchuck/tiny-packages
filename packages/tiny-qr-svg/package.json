@@ -1,20 +1,35 @@
 {
   "name": "@levischuck/tiny-qr-svg",
   "version": "0.0.1",
-  "module": "src/index.ts",
   "type": "module",
   "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
   "dependencies": {
     "@levischuck/tiny-qr": "workspace:*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "bun run build",
+    "svg": "bun run src/svg.ts",
+    "type-check": "bunx tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "^1.3.5"
   },
   "peerDependencies": {
     "typescript": "^5"
-  },
-  "scripts": {
-    "svg": "bun run src/svg.ts",
-    "type-check": "bunx tsc --noEmit"
   }
 }

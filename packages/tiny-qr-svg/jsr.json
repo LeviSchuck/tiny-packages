@@ -1,0 +1,5 @@
+{
+  "name": "@levischuck/tiny-qr-svg",
+  "version": "0.0.1",
+  "exports": "./dist/index.js"
+}

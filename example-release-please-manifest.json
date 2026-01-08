@@ -1,0 +1,36 @@
+{
+  "packages": {
+    ".": {
+      "component": "api",
+      "release-type": "node",
+      "exclude-paths": ["client"]
+    },
+    "client": {
+      "component": "client",
+      "release-type": "node"
+    }
+  },
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "bump-minor-pre-major": false,
+  "bump-patch-for-minor-pre-major": false,
+  "draft": false,
+  "prerelease": false,
+  "changelog-path": "CHANGELOG.md",
+  "always-link-local": false,
+  "plugins": [
+    {
+      "type": "node-workspace",
+      "merge": false,
+      "updateAllPackages": true,
+      "updatePeerDependencies": true
+    },
+    {
+      "type": "linked-versions",
+      "groupName": "api",
+      "components": [
+        "api", "client"
+      ]
+    }
+  ]
+}
