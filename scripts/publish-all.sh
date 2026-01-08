@@ -33,11 +33,11 @@ for PACKAGE in "${PACKAGES[@]}"; do
   fi
   
   # Publish to JSR
-  if [ "$DRY_RUN" = "--dry-run" ]; then
-    "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE" --dry-run
-  else
-    "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE"
-  fi
+  # if [ "$DRY_RUN" = "--dry-run" ]; then
+  #   "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE" --dry-run
+  # else
+  #   "$SCRIPT_DIR/publish-jsr.sh" "$PACKAGE"
+  # fi
   
   echo ""
 done

@@ -1,0 +1,50 @@
+on:
+  release:
+    types:
+      - published
+
+name: publish
+
+jobs:
+  publish:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "25.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Update package versions from manifest
+        run: |
+          # Read versions from manifest and update package.json files
+          TINY_PNG_VERSION=$(cat .release-please-manifest.json | grep -o '"packages/tiny-png": "[^"]*"' | cut -d'"' -f4)
+          TINY_QR_VERSION=$(cat .release-please-manifest.json | grep -o '"packages/tiny-qr": "[^"]*"' | cut -d'"' -f4)
+          TINY_QR_PNG_VERSION=$(cat .release-please-manifest.json | grep -o '"packages/tiny-qr-png": "[^"]*"' | cut -d'"' -f4)
+          TINY_QR_SVG_VERSION=$(cat .release-please-manifest.json | grep -o '"packages/tiny-qr-svg": "[^"]*"' | cut -d'"' -f4)
+          
+          cd packages/tiny-png && bun run ../../scripts/update-version.ts "$TINY_PNG_VERSION"
+          cd ../tiny-qr && bun run ../../scripts/update-version.ts "$TINY_QR_VERSION"
+          cd ../tiny-qr-png && bun run ../../scripts/update-version.ts "$TINY_QR_PNG_VERSION"
+          cd ../tiny-qr-svg && bun run ../../scripts/update-version.ts "$TINY_QR_SVG_VERSION"
+          cd ../..
+      - name: Build all packages
+        run: |
+          # Build packages in dependency order
+          cd packages/tiny-png && bun run build
+          cd ../tiny-qr && bun run build
+          cd ../tiny-qr-png && bun run build
+          cd ../tiny-qr-svg && bun run build
+          cd ../..
+      - name: Publish all packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: chmod +x scripts/*.sh && ./scripts/publish-all.sh
