@@ -2,22 +2,25 @@
   "packages": {
     "packages/tiny-png": {
       "component": "tiny-png",
-      "release-type": "node"
+      "release-type": "node",
+      "changelog-path": "tiny-png/CHANGELOG.md"
     },
     "packages/tiny-qr": {
       "component": "tiny-qr",
-      "release-type": "node"
+      "release-type": "node",
+      "changelog-path": "tiny-qr/CHANGELOG.md"
     },
     "packages/tiny-qr-png": {
       "component": "tiny-qr-png",
-      "release-type": "node"
+      "release-type": "node",
+      "changelog-path": "tiny-qr-png/CHANGELOG.md"
     },
     "packages/tiny-qr-svg": {
       "component": "tiny-qr-svg",
-      "release-type": "node"
+      "release-type": "node",
+      "changelog-path": "tiny-qr-svg/CHANGELOG.md"
     },
     ".": {
-      "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
@@ -30,7 +33,6 @@
   "bump-patch-for-minor-pre-major": false,
   "draft": false,
   "prerelease": false,
-  "changelog-path": "CHANGELOG.md",
   "always-link-local": false,
   "plugins": [
     {
