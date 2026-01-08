@@ -43,3 +43,6 @@ Converts a QR code result to a PNG image.
 ## License
 
 MIT Licensed.
+
+The word "QR Code" is registered trademark of DENSO WAVE INCORPORATED
+http://www.denso-wave.com/qrcode/faqpatent-e.html

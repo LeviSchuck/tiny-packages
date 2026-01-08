@@ -80,3 +80,6 @@ Converts a QR code result to a JSX element. Designed for Hono, but should work w
 ## License
 
 MIT Licensed.
+
+The word "QR Code" is registered trademark of DENSO WAVE INCORPORATED
+http://www.denso-wave.com/qrcode/faqpatent-e.html

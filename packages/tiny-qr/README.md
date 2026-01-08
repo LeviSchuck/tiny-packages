@@ -63,3 +63,6 @@ Generates a QR code from the given data.
 MIT Licensed.
 
 This code is largely derived from [qrcode-rust](https://github.com/kennytm/qrcode-rust) by kennytm, which provides an MIT and Apache 2 license to its code.
+
+The word "QR Code" is registered trademark of DENSO WAVE INCORPORATED
+http://www.denso-wave.com/qrcode/faqpatent-e.html
