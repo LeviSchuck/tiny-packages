@@ -4,6 +4,10 @@ node_modules
 # output
 out
 dist
+jsr_dist
+jsr_build
+**/jsr_dist
+**/jsr_build
 **/dist
 *.tgz
 

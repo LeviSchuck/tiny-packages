@@ -23,4 +23,6 @@ jobs:
         run: ./scripts/publish-all-npm.sh
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
+      - name: Publish all packages
+        run: ./scripts/publish-all-jsr.sh
 

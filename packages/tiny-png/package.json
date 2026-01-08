@@ -31,7 +31,8 @@
   "scripts": {
     "build": "vite build",
     "prepublishOnly": "bun run build",
-    "type-check": "bunx tsc --noEmit"
+    "type-check": "bunx tsc --noEmit",
+    "build:jsr": "echo Nothing to build"
   },
   "devDependencies": {
     "@types/bun": "latest"
