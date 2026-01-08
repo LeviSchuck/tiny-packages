@@ -1,5 +1,6 @@
 {
     "imports": {
-        "@levischuck/tiny-qr": "jsr:@levischuck/tiny-qr"
+        "@levischuck/tiny-qr": "jsr:@levischuck/tiny-qr",
+        "@levischuck/tiny-png": "jsr:@levischuck/tiny-png"
     }
 }
