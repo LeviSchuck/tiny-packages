@@ -30,7 +30,8 @@
   ],
   "scripts": {
     "build": "vite build",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "bun run build",
+    "type-check": "bunx tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "latest"
