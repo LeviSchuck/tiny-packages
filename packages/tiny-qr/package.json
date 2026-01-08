@@ -14,7 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/levischuck/tiny-packages.git"
+    "url": "https://github.com/LeviSchuck/tiny-packages",
+    "directory": "packages/tiny-qr"
   },
   "publishConfig": {
     "access": "public"
