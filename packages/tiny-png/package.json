@@ -12,10 +12,21 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levischuck/tiny-packages.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md",
     "LICENSE.txt"
+  ],
+  "keywords": [
+    "png",
+    "encoder"
   ],
   "scripts": {
     "build": "vite build",

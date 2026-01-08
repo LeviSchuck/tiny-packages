@@ -12,10 +12,22 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levischuck/tiny-packages.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md",
     "LICENSE.txt"
+  ],
+  "keywords": [
+    "qr",
+    "svg",
+    "encoder"
   ],
   "dependencies": {
     "@levischuck/tiny-qr": "workspace:*"
