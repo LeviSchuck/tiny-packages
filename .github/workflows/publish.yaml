@@ -23,8 +23,6 @@ jobs:
       - name: Publish all packages to NPM
         run: ./scripts/publish-all-npm.sh
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUN_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
