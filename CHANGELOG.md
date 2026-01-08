@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.2...tiny-packages-v1.0.3) (2026-01-08)
+
+
+### Bug Fixes
+
+* Limit publication to tiny-packages ([1abde1c](https://github.com/LeviSchuck/tiny-packages/commit/1abde1c90d2ec892313f7395ea3448845a1bb4ef))
+
 ## [1.0.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.1...tiny-packages-v1.0.2) (2026-01-08)
 
 
