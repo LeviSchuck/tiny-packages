@@ -1,19 +1,58 @@
 import type { QrResult } from '@levischuck/tiny-qr';
 import { indexedPng } from '@levischuck/tiny-png';
 
+/**
+ * Options for the PNG generation
+ */
 export interface PngOptions {
+  /**
+   * Quiet zone size in modules (default: `4`)
+   */
   margin?: number;
+  /**
+   * Size of each module in pixels (default: `4`)
+   */
   moduleSize?: number;
+  /**
+   * RGB background color (default: `[255, 255, 255]`)
+   */
   backgroundColor?: [number, number, number];
+  /**
+   * RGB foreground color (default: `[0, 0, 0]`)
+   */
   foregroundColor?: [number, number, number];
 }
 
+/**
+ * Output PNG image, with width and height
+ * Could be converted into a Blob with image/png MIME type
+ */
 export interface PngResult {
+  /**
+   * PNG image data
+   */
   bytes: Uint8Array;
+  /**
+   * Image width in pixels
+   */
   width: number;
+  /**
+   * Image height in pixels
+   */
   height: number;
 }
 
+/**
+ * Converts a QR code result to a PNG image.
+ * 
+ * @param qr - QR code result from `@levischuck/tiny-qr`
+ * @param options - Options for the PNG generation
+ * @param options.margin - Quiet zone size in modules (default: `4`)
+ * @param options.moduleSize - Size of each module in pixels (default: `4`)
+ * @param options.backgroundColor - RGB background color (default: `[255, 255, 255]`)
+ * @param options.foregroundColor - RGB foreground color (default: `[0, 0, 0]`)
+ * @returns Promise resolving to a `PngResult` object:
+ */
 export async function toPng(qr: QrResult, options: PngOptions = {}): Promise<PngResult> {
   const {
     margin = 4,

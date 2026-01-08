@@ -5,7 +5,8 @@
     ".": "./src/index.ts"
   },
   "license": "MIT",
-  "exclude": [
+  "publish": {
+    "exclude": [
       "dist",
       "node_modules",
       "vite.config.ts",
@@ -13,5 +14,6 @@
       "CHANGELOG.md",
       "tsconfig.json",
       "bun.lock"
-  ]
+    ]
+  }
 }

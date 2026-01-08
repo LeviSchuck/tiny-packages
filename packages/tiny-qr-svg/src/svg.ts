@@ -90,7 +90,7 @@ const svg = toSvgString(qr, {
 
 // Output to file or stdout
 if (outputFile) {
-  await Bun.write(outputFile, svg);
+  await Bun.write(outputFile, svg.svg);
   console.error(`QR code saved to ${outputFile}`);
 } else {
   console.log(svg);

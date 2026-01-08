@@ -1,25 +1,70 @@
 import type { QrResult } from '@levischuck/tiny-qr';
 
+/**
+ * Options for the SVG generation
+ */
 export interface SvgOptions {
+  /**
+   * Background color (default: `'white'`)
+   */
   background?: string;
+  /**
+   * Foreground color (default: `'black'`)
+   */
   color?: string;
+  /**
+   * Quiet zone size in modules (default: `4`)
+   */
   margin?: number;
+  /**
+   * Size of each module in pixels (default: `4`)
+   */
   moduleSize?: number;
+  /**
+   * Output format (default: `'svg+xml'`)
+   */
   output?: 'path' | 'g' | 'svg' | 'svg+xml';
 }
 
 export interface JsxOptions {
+  /**
+   * Background color (default: `'white'`)
+   */
   background?: string;
+  /**
+   * Foreground color (default: `'black'`)
+   */
   color?: string;
+  /**
+   * Quiet zone size in modules (default: `4`)
+   */
   margin?: number;
+  /**
+   * Size of each module in pixels (default: `4`)
+   */
   moduleSize?: number;
+  /**
+   * Output format (default: `'svg'`)
+   */
   output?: 'g' | 'svg';
 }
 
+/**
+ * JSX node type, should be compatible with Hono, React, and Preact
+ */
 export type JsxNode = JsxElement | string | boolean | number | undefined | null | JsxNode[] | Promise<string>;
 
+/**
+ * JSX element type
+ */
 export interface JsxElement {
+  /**
+   * Element type
+   */
   type: string;
+  /**
+   * Element properties
+   */
   props: Record<string, unknown> & { children?: JsxNode };
 }
 
@@ -39,7 +84,37 @@ function generatePathData(matrix: boolean[][], moduleSize: number): string {
   return pathChunks.join(' ')
 }
 
-export function toSvgString(qr: QrResult, options: SvgOptions = {}): string {
+/**
+ * SVG with width and height
+ */
+export interface SvgResult<T> {
+  /**
+   * SVG content
+   */
+  svg: T;
+  /**
+   * Image width in pixels
+   */
+  width: number;
+  /**
+   * Image height in pixels
+   */
+  height: number;
+}
+
+/**
+ * Converts a QR code result to an SVG string.
+ * 
+ * @param qr - QR code result from `@levischuck/tiny-qr`
+ * @param options - Options for the SVG generation
+ * @param options.margin - Quiet zone size in modules (default: `4`)
+ * @param options.moduleSize - Size of each module in pixels (default: `4`)
+ * @param options.background - Background color (default: `'white'`)
+ * @param options.color - Foreground color (default: `'black'`)
+ * @param options.output - Output format (default: `'svg+xml'`)
+ * @returns SVG string in the requested format
+ */
+export function toSvgString(qr: QrResult, options: SvgOptions = {}): SvgResult<string> {
   const {
     background = 'white',
     color = 'black',
@@ -55,7 +130,11 @@ export function toSvgString(qr: QrResult, options: SvgOptions = {}): string {
   const pathData = generatePathData(matrix, moduleSize);
 
   if (output === 'path') {
-    return pathData;
+    return {
+      svg: pathData,
+      width: totalSize,
+      height: totalSize
+    };
   }
 
   const pathElement = `<path d="${pathData}" stroke="transparent" fill="${color}"/>`;
@@ -66,7 +145,11 @@ export function toSvgString(qr: QrResult, options: SvgOptions = {}): string {
     const bgRect = background !== 'transparent'
       ? `<rect width="${qrSize}" height="${qrSize}" fill="${background}"/>`
       : '';
-    return `<g${transformAttr}>${bgRect}${pathElement}</g>`;
+    return {
+      svg: `<g${transformAttr}>${bgRect}${pathElement}</g>`,
+      width: totalSize,
+      height: totalSize
+    }
   }
 
   const gElement = `<g${transformAttr}>${pathElement}</g>`;
@@ -78,14 +161,34 @@ export function toSvgString(qr: QrResult, options: SvgOptions = {}): string {
   const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalSize} ${totalSize}">${backgroundRect}${gElement}</svg>`;
 
   if (output === 'svg') {
-    return svgContent;
+    return {
+      svg: svgContent,
+      width: totalSize,
+      height: totalSize
+    }
   }
 
   // svg+xml
-  return `<?xml version="1.0" encoding="UTF-8"?>\n${svgContent}`;
+  return {
+    svg: `<?xml version="1.0" encoding="UTF-8"?>\n${svgContent}`,
+    width: totalSize,
+    height: totalSize
+  }
 }
 
-export function toSvgJsx(qr: QrResult, options: JsxOptions = {}): JsxElement {
+/**
+ * Converts a QR code result to a JSX element.
+ * 
+ * @param qr - QR code result from `@levischuck/tiny-qr`
+ * @param options - Options for the JSX generation
+ * @param options.margin - Quiet zone size in modules (default: `4`)
+ * @param options.moduleSize - Size of each module in pixels (default: `4`)
+ * @param options.background - Background color (default: `'white'`)
+ * @param options.color - Foreground color (default: `'black'`)
+ * @param options.output - Output format (default: `'svg'`)
+ * @returns JSX element in the requested format
+ */
+export function toSvgJsx(qr: QrResult, options: JsxOptions = {}): SvgResult<JsxElement> {
   const {
     background = 'white',
     color = 'black',
@@ -132,8 +235,12 @@ export function toSvgJsx(qr: QrResult, options: JsxOptions = {}): JsxElement {
     }
 
     return {
-      type: 'g',
-      props
+      svg: {
+        type: 'g',
+        props
+      },
+      width: totalSize,
+      height: totalSize
     };
   }
 
@@ -164,12 +271,16 @@ export function toSvgJsx(qr: QrResult, options: JsxOptions = {}): JsxElement {
   children.push(gElement);
 
   return {
-    type: 'svg',
-    props: {
-      xmlns: 'http://www.w3.org/2000/svg',
-      version: '1.1',
-      viewBox: `0 0 ${totalSize} ${totalSize}`,
-      children
-    }
+    svg: {
+      type: 'svg',
+      props: {
+        xmlns: 'http://www.w3.org/2000/svg',
+        version: '1.1',
+        viewBox: `0 0 ${totalSize} ${totalSize}`,
+        children
+      }
+    },
+    width: totalSize,
+    height: totalSize
   };
 }
