@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.3...tiny-packages-v1.0.4) (2026-01-08)
+
+
+### Bug Fixes
+
+* Try NPM_CONFIG_TOKEN for bun (why do you need to be special?) ([9480bd8](https://github.com/LeviSchuck/tiny-packages/commit/9480bd8e645d05d060ca3397d6a7551d892699d5))
+
 ## [1.0.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.2...tiny-packages-v1.0.3) (2026-01-08)
 
 
