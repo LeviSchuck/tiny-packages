@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.6...tiny-packages-v1.0.7) (2026-01-08)
+
+
+### Bug Fixes
+
+* Oops, use NPM not node ([020b28e](https://github.com/LeviSchuck/tiny-packages/commit/020b28e01a7b0406d73c2cb7ec1e901b12fa943f))
+
 ## [1.0.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.5...tiny-packages-v1.0.6) (2026-01-08)
 
 
