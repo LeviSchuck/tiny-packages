@@ -28,7 +28,7 @@
 
     // Workspace resolution
     "paths": {
-      "tiny-qr": ["../tiny-qr/src/index.ts"]
+      "@levischuck/tiny-qr": ["../tiny-qr/src/index.ts"]
     }
   }
 }

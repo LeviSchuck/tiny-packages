@@ -33,7 +33,7 @@ describe('toPng', () => {
   test('should generate valid PNG with default options', async () => {
     const result = await toPng(testQrResult);
 
-    expect(isPng(result.bytes)).toBe(true);
+    expect(isPng(result.bytes.buffer as ArrayBuffer)).toBe(true);
   });
 
   test('should return correct dimensions (default margin and moduleSize)', async () => {
@@ -43,7 +43,7 @@ describe('toPng', () => {
     // totalSize = (3 + 4*2) * 4 = 44
     expect(result.width).toBe(44);
     expect(result.height).toBe(44);
-    expect(isPng(result.bytes)).toBe(true);
+    expect(isPng(result.bytes.buffer as ArrayBuffer)).toBe(true);
   });
 
   test('should return correct dimensions with custom margin', async () => {
@@ -98,7 +98,7 @@ describe('toPng', () => {
   test('should return PngResult with bytes, width, and height', async () => {
     const result = await toPng(testQrResult);
 
-    expect(result.bytes).toBeInstanceOf(ArrayBuffer);
+    expect(result.bytes).toBeInstanceOf(Uint8Array);
     expect(typeof result.width).toBe('number');
     expect(typeof result.height).toBe('number');
     expect(result.width).toBeGreaterThan(0);
