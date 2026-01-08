@@ -7,6 +7,7 @@ name: publish
 
 jobs:
   publish:
+    if: ${{ github.ref_type != 'tag' || startsWith(github.ref_name, 'tiny-packages') }}
     permissions:
       contents: read
       id-token: write
@@ -21,6 +22,9 @@ jobs:
         run: bun install
       - name: Publish all packages
         run: ./scripts/publish-all-npm.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUN_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
       - name: Publish all packages
