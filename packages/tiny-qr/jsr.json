@@ -8,9 +8,9 @@
   "exclude": [
       "dist",
       "node_modules",
-      "tsconfig.ts",
       "vite.config.ts",
       "package.json",
-      "CHANGELOG.md"
+      "CHANGELOG.md",
+      "tsconfig.json"
   ]
 }
