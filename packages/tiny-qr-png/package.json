@@ -1,0 +1,21 @@
+{
+  "name": "@levischuck/tiny-qr-png",
+  "version": "0.0.1",
+  "module": "src/index.ts",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@levischuck/tiny-qr": "workspace:*",
+    "@levischuck/tiny-png": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "png": "bun run src/png.ts",
+    "type-check": "bunx tsc --noEmit"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "tiny-packages",
+  "private": true,
+  "workspaces": ["packages/*"]
+}
