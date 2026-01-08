@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.4...tiny-packages-v1.0.5) (2026-01-08)
+
+
+### Bug Fixes
+
+* Remove unused env vars ([ea1af62](https://github.com/LeviSchuck/tiny-packages/commit/ea1af62fc74907ea2dc3a5f09f1ffdba9beda36d))
+
 ## [1.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.3...tiny-packages-v1.0.4) (2026-01-08)
 
 
