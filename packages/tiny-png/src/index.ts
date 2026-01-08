@@ -2,6 +2,18 @@ import { concat } from "./bytes.ts";
 import { deflate } from "./compress.ts";
 import { pngChunk } from "./pngBytes.ts";
 
+/**
+ * Generate an indexed-color PNG image, up to 255 colors are supported
+ * 
+ * @param input - Pixel data as a Uint8Array where each byte is a palette index
+ * @param width - Image width in pixels
+ * @param height - Image height in pixels
+ * @param colors - Color palette as an array of `[R, G, B]` tuples (0-255)
+ * @returns Promise resolving to PNG file bytes as a Uint8Array
+ * @throws Error if the color palette doesn't have enough colors for the highest index in the input data.
+ * @throws Error if the input does not match the dimensions.
+ * @throws Error if the input is empty.
+ */
 export async function indexedPng(
   input: Uint8Array,
   width: number,
@@ -41,8 +53,10 @@ export async function indexedPng(
   const ihdrView = new DataView(ihdrData.buffer);
   ihdrView.setUint32(0, width);
   ihdrView.setUint32(4, height);
-  ihdrData[8] = 8;
-  ihdrData[9] = 3;
+  // Technically could go lower, but that's more code to figure out..
+  ihdrData[8] = 8; // 8 bits per image data value
+  // If I ever want to support RGB, this is 2, RGBA is 6
+  ihdrData[9] = 3; // Indexed color
   ihdrData[10] = 0;
   ihdrData[11] = 0;
   ihdrData[12] = 0;
