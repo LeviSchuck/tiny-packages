@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.3...tiny-png-v0.0.4) (2026-01-08)
+
+
+### Bug Fixes
+
+* Use the same url as provenance ([414ed7c](https://github.com/LeviSchuck/tiny-packages/commit/414ed7ca496c30c63a2f6ebf83e8340d2b917614))
+
 ## [0.0.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.2...tiny-png-v0.0.3) (2026-01-08)
 
 
