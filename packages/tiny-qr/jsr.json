@@ -11,6 +11,7 @@
       "vite.config.ts",
       "package.json",
       "CHANGELOG.md",
-      "tsconfig.json"
+      "tsconfig.json",
+      "bun.lock"
   ]
 }
