@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.7...tiny-packages-v1.0.8) (2026-01-08)
+
+
+### Bug Fixes
+
+* Use the same url as provenance ([414ed7c](https://github.com/LeviSchuck/tiny-packages/commit/414ed7ca496c30c63a2f6ebf83e8340d2b917614))
+
 ## [1.0.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.6...tiny-packages-v1.0.7) (2026-01-08)
 
 
