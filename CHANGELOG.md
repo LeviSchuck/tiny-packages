@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.1...tiny-packages-v1.0.2) (2026-01-08)
+
+
+### Bug Fixes
+
+* add documentation symbols ([d7ca32f](https://github.com/LeviSchuck/tiny-packages/commit/d7ca32f9062803334211e10b7aaa0b442face210))
+* Add QR Code disclosure ([137ee1e](https://github.com/LeviSchuck/tiny-packages/commit/137ee1e690dd70127670d06f52b5f7b22a0264ec))
+* Exclude tsconfig ([7efc7ee](https://github.com/LeviSchuck/tiny-packages/commit/7efc7eed69749050d00f54ea2a70c5418379f3ac))
+* fix tests ([0684cc9](https://github.com/LeviSchuck/tiny-packages/commit/0684cc929725784ccf0c273e1c5b5ecc75e7cb0a))
+* Publishing should come through JSR now ([facca89](https://github.com/LeviSchuck/tiny-packages/commit/facca894b6dc4fa080c7ba0717bda757fe06be09))
+
 ## [1.0.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.0...tiny-packages-v1.0.1) (2026-01-08)
 
 
