@@ -18,12 +18,20 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: Set up node (cry)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@levischuck'
+
       - name: Install dependencies
         run: bun install
       - name: Publish all packages to NPM
         run: ./scripts/publish-all-npm.sh
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
       - name: Publish all packages to JSR

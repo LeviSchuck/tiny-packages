@@ -57,16 +57,18 @@ else
   fi
 fi
 
-# Build the package (prepublishOnly will also build, but this ensures dry-run works)
-echo "Building $NPM_PACKAGE_NAME..."
-bun run build
+PROV=""
+if [ "$CI" = "true" ]; then
+  PROV="--provenance"
+fi
 
+# Build the package (prepublishOnly will also build, but this ensures dry-run works)
 if [ "$DRY_RUN" = "--dry-run" ]; then
   echo "Running npm publish --dry-run for $NPM_PACKAGE_NAME..."
   # For dry-run, we need to build manually since prepublishOnly doesn't run
-  bun publish --dry-run
+  npm publish --dry-run $PROV
 else
   echo "Publishing $NPM_PACKAGE_NAME to npm (version $LOCAL_VERSION)..."
   # prepublishOnly will build again, but that's fine as a safety check
-  bun publish
+  npm publish $PROV
 fi
