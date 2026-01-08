@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.5...tiny-packages-v1.0.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* Use NPM instead of bun for publishing ([03008ad](https://github.com/LeviSchuck/tiny-packages/commit/03008ad5aee5074a9a6522598fe1bdb69ee7571d))
+
 ## [1.0.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.4...tiny-packages-v1.0.5) (2026-01-08)
 
 
