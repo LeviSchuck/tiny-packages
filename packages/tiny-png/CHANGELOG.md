@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.4...tiny-png-v0.0.5) (2026-01-09)
+
+
+### Bug Fixes
+
+* Correct the bun to npm publish transition ([5058776](https://github.com/LeviSchuck/tiny-packages/commit/505877668bf0d6f5e87469442f595e0ee9fc4037))
+
 ## [0.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.3...tiny-png-v0.0.4) (2026-01-08)
 
 
