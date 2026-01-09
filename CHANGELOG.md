@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.8...tiny-packages-v1.0.9) (2026-01-09)
+
+
+### Bug Fixes
+
+* Correct the bun to npm publish transition ([5058776](https://github.com/LeviSchuck/tiny-packages/commit/505877668bf0d6f5e87469442f595e0ee9fc4037))
+
 ## [1.0.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.7...tiny-packages-v1.0.8) (2026-01-08)
 
 
