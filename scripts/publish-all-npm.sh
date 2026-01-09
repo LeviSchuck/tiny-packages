@@ -17,9 +17,10 @@ cd "$PROJECT_ROOT"
 
 DRY_RUN=$1
 
-PACKAGES=("tiny-png" "tiny-qr" "tiny-qr-png" "tiny-qr-svg")
+# Read packages from workspace.json
+PACKAGES=$(jq -r '.packages[]' "$PROJECT_ROOT/workspace.json")
 
-for PACKAGE in "${PACKAGES[@]}"; do
+for PACKAGE in $PACKAGES; do
   echo ""
   echo "=========================================="
   echo "Publishing $PACKAGE"

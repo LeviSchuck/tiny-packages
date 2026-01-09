@@ -1,0 +1,8 @@
+{
+  "packages": [
+    "tiny-png",
+    "tiny-qr",
+    "tiny-qr-png",
+    "tiny-qr-svg"
+  ]
+}

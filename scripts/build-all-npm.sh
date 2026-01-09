@@ -12,11 +12,15 @@ cd "$PROJECT_ROOT"
 
 echo "Building all packages in dependency order..."
 
+# Read packages from workspace.json
+PACKAGES=$(jq -r '.packages[]' "$PROJECT_ROOT/workspace.json")
+
 # Build packages in dependency order
-cd packages/tiny-png && bun run build
-cd ../tiny-qr && bun run build
-cd ../tiny-qr-png && bun run build
-cd ../tiny-qr-svg && bun run build
-cd ../..
+for package in $PACKAGES; do
+  echo "Building $package..."
+  cd "$PROJECT_ROOT/packages/$package" && bun run build
+done
+
+cd "$PROJECT_ROOT"
 
 echo "All packages built successfully!"
