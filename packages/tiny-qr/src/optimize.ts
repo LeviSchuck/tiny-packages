@@ -1,5 +1,6 @@
 import { modeDataBitsCount, modeLengthBitsCount, modeMax } from './mode.ts';
-import { Mode, type Version } from './types.ts';
+import { Mode } from './types.ts';
+import type { Version } from './types.ts';
 import { versionModeBitsCount } from './version.ts';
 
 /** A segment of data committed to an encoding mode */

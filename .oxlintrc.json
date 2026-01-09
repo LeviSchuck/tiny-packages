@@ -1,0 +1,13 @@
+{
+  "plugins": ["import", "typescript"],
+  "rules": {
+    "import/extensions": ["error", "always", {
+      "ignorePackages": true
+    }],
+    "no-unused-vars": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-explicit-any": "error",
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"]
+  },
+  "ignorePatterns": ["**/*.test.ts", "**/dist/**", "**/node_modules/**", "**/*.d.ts", "**/npm_build/**", "**/jsr_build/**", "**/vite.config.ts"]
+}

@@ -33,7 +33,8 @@
     "build": "vite build",
     "prepublishOnly": "bun run build",
     "type-check": "bunx tsc --noEmit",
-    "build:jsr": "echo Nothing to build"
+    "build:jsr": "echo Nothing to build",
+		"lint": "oxlint -c ../../.oxlintrc.json"
   },
   "devDependencies": {
     "@types/bun": "^1.3.5"

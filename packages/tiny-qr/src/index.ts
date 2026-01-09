@@ -1,4 +1,5 @@
-import { Color, EcLevel, type QrOptions, type QrResult } from './types.ts';
+import { Color, EcLevel } from './types.ts';
+import type { QrOptions, QrResult } from './types.ts';
 import { bitsIntoBytes, bitsVersion, encodeAuto } from './bits.ts';
 import { constructCodewords } from './ec.ts';
 import { canvasApplyBestMask, canvasDrawAllFunctionalPatterns, canvasDrawData, canvasIntoColors, createCanvas } from './canvas.ts';

@@ -6,7 +6,7 @@ export function versionWidth(version: Version): number {
 }
 
 /** Gets the number of bits needed to encode the mode indicator */
-export function versionModeBitsCount(version: Version): number {
+export function versionModeBitsCount(_version: Version): number {
   return 4; // Normal QR codes always use 4 bits
 }
 

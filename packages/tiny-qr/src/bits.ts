@@ -1,4 +1,5 @@
-import { EcLevel, Mode, type Version } from './types.ts';
+import { Mode } from './types.ts';
+import type { EcLevel, Version } from './types.ts';
 import { createOptimizer, createParser, optimizerCollect, totalEncodedLen } from './optimize.ts';
 import type { Segment } from './optimize.ts';
 import { versionFetch, versionModeBitsCount } from './version.ts';

@@ -1,4 +1,4 @@
-import { EcLevel, type Version } from './types.ts';
+import type { EcLevel, Version } from './types.ts';
 import { versionFetch } from './version.ts';
 
 // GF(256) exponential and logarithm tables

@@ -1,4 +1,5 @@
-import { Color, EcLevel, type Version } from './types.ts';
+import { Color } from './types.ts';
+import type { EcLevel, Version } from './types.ts';
 import { versionWidth } from './version.ts';
 
 enum Module {
