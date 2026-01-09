@@ -18,6 +18,10 @@ for package in packages/*/; do
     echo "Removing ${package}dist"
     rm -rf "${package}dist"
   fi
+  if [ -d "${package}npm_build" ]; then
+    echo "Removing ${package}npm_build"
+    rm -rf "${package}npm_build"
+  fi
 done
 
 echo "All package builds cleaned successfully!"

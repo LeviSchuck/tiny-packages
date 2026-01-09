@@ -6,8 +6,10 @@ out
 dist
 jsr_dist
 jsr_build
+npm_build
 **/jsr_dist
 **/jsr_build
+**/npm_build
 **/dist
 *.tgz
 
