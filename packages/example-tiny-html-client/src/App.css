@@ -1,0 +1,106 @@
+.app-container {
+  display: flex;
+  gap: 2rem;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.input-panel,
+.output-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.input-panel h2,
+.output-panel h2 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.html-input {
+  flex: 1;
+  width: 100%;
+  padding: 1.5rem;
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.html-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: white;
+}
+
+.rendered-output {
+  flex: 1;
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  overflow: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.error {
+  color: #dc3545;
+  padding: 1rem;
+  background: #ffe0e0;
+  border-radius: 8px;
+  font-family: monospace;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .input-panel h2,
+  .output-panel h2 {
+    color: #e0e0e0;
+  }
+
+  .html-input {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #3a3a3a;
+  }
+
+  .html-input:focus {
+    background: #252525;
+    border-color: #667eea;
+  }
+
+  .rendered-output {
+    background: #1e1e1e;
+    border-color: #3a3a3a;
+    color: #e0e0e0;
+  }
+
+  .error {
+    background: #3a1e1e;
+    color: #ff6b6b;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .input-panel,
+  .output-panel {
+    min-height: 300px;
+  }
+}

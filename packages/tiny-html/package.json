@@ -1,0 +1,45 @@
+{
+  "name": "@levischuck/tiny-html",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeviSchuck/tiny-packages",
+    "directory": "packages/tiny-html"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "keywords": [
+    "html",
+    "parser"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "bun run build",
+    "type-check": "bunx tsc --noEmit",
+    "build:jsr": "echo Nothing to build",
+		"lint": "oxlint -c ../../.oxlintrc.json"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
