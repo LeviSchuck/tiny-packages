@@ -27,7 +27,8 @@
   ],
   "keywords": [
     "html",
-    "parser"
+    "parser",
+    "react"
   ],
   "scripts": {
     "build": "vite build",
