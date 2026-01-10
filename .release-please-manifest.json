@@ -4,5 +4,5 @@
   "packages/tiny-qr-png": "0.0.7",
   "packages/tiny-qr-svg": "0.0.7",
   "packages/tiny-html": "0.0.1",
-  ".": "0.0.1"
+  ".": "1.0.11"
 }
