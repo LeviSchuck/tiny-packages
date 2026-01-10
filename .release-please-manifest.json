@@ -1,8 +1,8 @@
 {
-  "packages/tiny-png": "0.0.8",
+  "packages/tiny-png": "0.1.0",
   "packages/tiny-qr": "0.0.8",
-  "packages/tiny-qr-png": "0.0.8",
+  "packages/tiny-qr-png": "0.0.9",
   "packages/tiny-qr-svg": "0.0.8",
   "packages/tiny-html": "0.0.4",
-  ".": "1.0.14"
+  ".": "1.1.0"
 }
