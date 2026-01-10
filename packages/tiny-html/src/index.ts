@@ -42,6 +42,7 @@ export async function awaitHtmlNode(node: HtmlNode | Promise<HtmlNode>): Promise
 
 // Re-export converter
 export { htmlNodeTo } from './convert.ts';
+export { decodeHtmlEntities, encodeHtmlEntities } from './entities.ts';
 export type { CreateElementFn, CreateElementProps } from './convert.ts';
 
 // Re-export public types
