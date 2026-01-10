@@ -1,4 +1,4 @@
-export function concat(...bytes: Uint8Array[]) : Uint8Array {
+export function concat(...bytes: Uint8Array[]) : Uint8Array<ArrayBuffer> {
   const output = new Uint8Array(
     bytes.reduceRight((acc, i) => acc + i.length, 0)
   );

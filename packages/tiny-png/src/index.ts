@@ -27,7 +27,7 @@ function packPixelData(
   width: number,
   height: number,
   bitDepth: 1 | 2 | 4 | 8
-): Uint8Array {
+): Uint8Array<ArrayBuffer> {
   const pixelsPerByte = 8 / bitDepth;
   const bytesPerRow = Math.ceil(width / pixelsPerByte);
   const stride = bytesPerRow + 1; // +1 for filter byte
@@ -73,7 +73,7 @@ export async function indexedPng(
   width: number,
   height: number,
   colors: [number, number, number][]
-): Promise<Uint8Array> {
+): Promise<Uint8Array<ArrayBuffer>> {
   const inputView = new DataView(input.buffer);
   const inputLength = inputView.byteLength;
 
