@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.2...tiny-html-v0.0.3) (2026-01-10)
+
+
+### Bug Fixes
+
+* Export encode and decode html entities ([90c8f06](https://github.com/LeviSchuck/tiny-packages/commit/90c8f06a53c472cf559e3679466942e5706a87b7))
+
 ## [0.0.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.1...tiny-html-v0.0.2) (2026-01-10)
 
 
