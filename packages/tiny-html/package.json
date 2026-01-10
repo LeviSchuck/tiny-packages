@@ -35,7 +35,7 @@
     "prepublishOnly": "bun run build",
     "type-check": "bunx tsc --noEmit",
     "build:jsr": "echo Nothing to build",
-		"lint": "oxlint -c ../../.oxlintrc.json"
+    "lint": "oxlint -c ../../.oxlintrc.json"
   },
   "devDependencies": {
     "@types/bun": "latest"
