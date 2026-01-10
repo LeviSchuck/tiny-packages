@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
 import { readHtml, htmlNodeTo } from '@levischuck/tiny-html';
 import type { HtmlNode } from '@levischuck/tiny-html';
-import { createElement, JSXNode } from 'hono/jsx';
+import { createElement } from 'hono/jsx';
+import type { JSXNode } from 'hono/jsx';
 
 const app = new Hono();
 
