@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.14...tiny-packages-v1.1.0) (2026-01-10)
+
+
+### Features
+
+* Indexed with automatic bit-depth ([5afafa5](https://github.com/LeviSchuck/tiny-packages/commit/5afafa54dc46419d86368e816207d5c70496fb08))
+
+
+### Bug Fixes
+
+* Types ([5076b44](https://github.com/LeviSchuck/tiny-packages/commit/5076b443aa93642dae1ae726546652ae646973ae))
+
 ## [1.0.14](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.13...tiny-packages-v1.0.14) (2026-01-10)
 
 
