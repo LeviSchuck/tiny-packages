@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.5...tiny-qr-v0.0.6) (2026-01-10)
+
+
+### Bug Fixes
+
+* Generalize type checking, add lints ([53fedf5](https://github.com/LeviSchuck/tiny-packages/commit/53fedf50034f23112b1b4703f031ed92f2b9449e))
+
 ## [0.0.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.4...tiny-qr-v0.0.5) (2026-01-09)
 
 
