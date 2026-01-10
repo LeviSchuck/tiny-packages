@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.3...tiny-html-v0.0.4) (2026-01-10)
+
+
+### Bug Fixes
+
+* Add getTextContent ([3743e73](https://github.com/LeviSchuck/tiny-packages/commit/3743e73221847cdc8fb0cd47e96c3a9e15c04d4e))
+
 ## [0.0.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.2...tiny-html-v0.0.3) (2026-01-10)
 
 
