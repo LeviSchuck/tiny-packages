@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'bun:test';
-import { writeHtml } from '../index';
+import { writeHtml, getTextContent } from '../index';
 import type { HtmlNode, HtmlElement } from '../index';
 
 // Helper to create test nodes that match HtmlNode
@@ -318,5 +318,235 @@ describe('Writer - SVG', () => {
       props: { viewBox: '0 0 100 100' },
     };
     expect(writeHtml(nodeObj as HtmlNode)).toBe('<svg viewBox="0 0 100 100"></svg>');
+  });
+});
+
+describe('getTextContent - Primitive Types', () => {
+  test('extracts text from string node', () => {
+    expect(getTextContent('Hello')).toBe('Hello');
+  });
+
+  test('extracts text from number node', () => {
+    expect(getTextContent(42)).toBe('42');
+  });
+
+  test('extracts text from bigint node', () => {
+    expect(getTextContent(BigInt(123))).toBe('123');
+  });
+
+  test('extracts text from boolean node', () => {
+    expect(getTextContent(true)).toBe('true');
+    expect(getTextContent(false)).toBe('false');
+  });
+
+  test('handles null and undefined', () => {
+    expect(getTextContent(null)).toBe('');
+    expect(getTextContent(undefined)).toBe('');
+  });
+
+  test('extracts text from array of primitives', () => {
+    expect(getTextContent(['Hello', ' ', 'World'])).toBe('Hello World');
+    expect(getTextContent([1, 2, 3])).toBe('123');
+    expect(getTextContent([true, false])).toBe('truefalse');
+  });
+});
+
+describe('getTextContent - Element Nodes', () => {
+  test('extracts text from element with string children', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { children: 'Hello World' },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Hello World');
+  });
+
+  test('extracts text from nested elements', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: {
+          type: 'p',
+          props: {
+            children: 'Paragraph text',
+          },
+        },
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Paragraph text');
+  });
+
+  test('extracts text from element with array children', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: ['Hello', ' ', 'World'],
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Hello World');
+  });
+
+  test('extracts text from deeply nested elements', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: {
+          type: 'p',
+          props: {
+            children: {
+              type: 'span',
+              props: {
+                children: 'Deep text',
+              },
+            },
+          },
+        },
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Deep text');
+  });
+
+  test('extracts text from multiple sibling elements', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: [
+          { type: 'p', props: { children: 'First' } },
+          { type: 'p', props: { children: 'Second' } },
+        ],
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('FirstSecond');
+  });
+
+  test('handles element with mixed children types', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: [
+          'Text',
+          42,
+          true,
+          { type: 'span', props: { children: 'More' } },
+        ],
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Text42trueMore');
+  });
+
+  test('handles element with no children', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {},
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('');
+  });
+});
+
+describe('getTextContent - Script, Style, Template Elements', () => {
+  test('skips script element content', () => {
+    const nodeObj = {
+      type: 'script',
+      props: {
+        children: 'console.log("Hello");',
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('');
+  });
+
+  test('skips style element content', () => {
+    const nodeObj = {
+      type: 'style',
+      props: {
+        children: '.foo { color: red; }',
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('');
+  });
+
+  test('skips template element content', () => {
+    const nodeObj = {
+      type: 'template',
+      props: {
+        children: '<div>Content</div>',
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('');
+  });
+
+  test('extracts text from elements inside script parent (but skips script itself)', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: [
+          { type: 'script', props: { children: 'hidden' } },
+          { type: 'p', props: { children: 'visible' } },
+        ],
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('visible');
+  });
+});
+
+describe('getTextContent - Edge Cases', () => {
+  test('handles empty array', () => {
+    expect(getTextContent([])).toBe('');
+  });
+
+  test('handles array with null/undefined', () => {
+    expect(getTextContent([null, undefined, 'text'])).toBe('text');
+  });
+
+  test('handles element with non-array children (string)', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        children: 'Single child',
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('Single child');
+  });
+
+  test('handles mixed array of elements and primitives', () => {
+    const nodes = [
+      'Start',
+      { type: 'span', props: { children: ['Middle'] } },
+      'End',
+    ];
+    expect(getTextContent(nodes as HtmlNode)).toBe('StartMiddleEnd');
+  });
+
+  test('handles complex nested structure', () => {
+    const nodeObj = {
+      type: 'article',
+      props: {
+        children: [
+          {
+            type: 'h1',
+            props: { children: ['Title'] },
+          },
+          {
+            type: 'p',
+            props: {
+              children: [
+                'Paragraph with ',
+                {
+                  type: 'strong',
+                  props: { children: ['bold'] },
+                },
+                ' text',
+              ],
+            },
+          },
+        ],
+      },
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('TitleParagraph with bold text');
+  });
+
+  test('handles element without props property', () => {
+    const nodeObj = {
+      type: 'div',
+    };
+    expect(getTextContent(nodeObj as HtmlNode)).toBe('');
   });
 });

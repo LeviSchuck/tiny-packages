@@ -297,3 +297,40 @@ function renderStyle(style: HtmlStyle): string {
 
   return declarations.join('; ');
 }
+
+export function getTextContent(node: HtmlNode): string {
+	const text : string[] = [];
+	function traverse(node: HtmlNode): void {
+		if (typeof node === "string") {
+			text.push(node);
+		}
+		if (typeof node === "number" || typeof node === "bigint" || typeof node === "boolean") {
+			text.push(`${node}`);
+		}
+		if (typeof node === "object" && node !== null && "type" in node && node.props && "children" in node.props) {
+			const children = node.props.children;
+			if (node.type === "script" || node.type === "style" || node.type === "template") {
+				return;
+			}
+			// Skip promises (should use awaitHtmlNode first)
+			if (children && typeof children === "object" && "then" in children && typeof children.then === "function") {
+				return;
+			}
+			if (Array.isArray(children)) {
+				for (const child of children) {
+					traverse(child);
+				}
+			} else if (children !== null && children !== undefined) {
+				// Handle single element children
+				traverse(children as HtmlNode);
+			}
+		}
+		if (Array.isArray(node)) {
+			for (const child of node) {
+				traverse(child);
+			}
+		}
+	}
+	traverse(node);
+	return text.join("");
+}

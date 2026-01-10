@@ -44,6 +44,7 @@ export async function awaitHtmlNode(node: HtmlNode | Promise<HtmlNode>): Promise
 export { htmlNodeTo } from './convert.ts';
 export { decodeHtmlEntities, encodeHtmlEntities } from './entities.ts';
 export type { CreateElementFn, CreateElementProps } from './convert.ts';
+export { getTextContent } from './writer.ts';
 
 // Re-export public types
 export type { WriterOptions, ParseResult, HtmlNode, HtmlElement, HtmlProps, HtmlStyle } from './types.ts';
