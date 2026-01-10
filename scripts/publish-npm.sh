@@ -52,8 +52,8 @@ else
   echo "NPM version: $NPM_VERSION"
 
   if [ "$LOCAL_VERSION" = "$NPM_VERSION" ]; then
-    echo "Version $LOCAL_VERSION is already published to npm. Skipping publish."
-    # exit 0
+    echo "Version $LOCAL_VERSION is already published to NPM. Skipping publish."
+    exit 0
   fi
 fi
 
