@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.9...tiny-packages-v1.0.10) (2026-01-10)
+
+
+### Bug Fixes
+
+* Generalize type checking, add lints ([53fedf5](https://github.com/LeviSchuck/tiny-packages/commit/53fedf50034f23112b1b4703f031ed92f2b9449e))
+* Introduce HTML Library ([#13](https://github.com/LeviSchuck/tiny-packages/issues/13)) ([5a9166d](https://github.com/LeviSchuck/tiny-packages/commit/5a9166dc23c5eede3680fab6b9c7d88bfb155fc9))
+
+
+### Miscellaneous Chores
+
+* release 1.0.10 ([d7166bb](https://github.com/LeviSchuck/tiny-packages/commit/d7166bb7dee6b96020a366b5ae7938cc7c62fed2))
+
 ## [1.0.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.8...tiny-packages-v1.0.9) (2026-01-09)
 
 
