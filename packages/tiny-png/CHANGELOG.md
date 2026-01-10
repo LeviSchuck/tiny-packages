@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.7...tiny-png-v0.0.8) (2026-01-10)
+
+
+### Bug Fixes
+
+* add documentation symbols ([d7ca32f](https://github.com/LeviSchuck/tiny-packages/commit/d7ca32f9062803334211e10b7aaa0b442face210))
+* Build tiny-png type-check ([82e19e0](https://github.com/LeviSchuck/tiny-packages/commit/82e19e0eba6a28f23dde7670d680a3a14ebee3eb))
+* Correct the bun to npm publish transition ([5058776](https://github.com/LeviSchuck/tiny-packages/commit/505877668bf0d6f5e87469442f595e0ee9fc4037))
+* Exclude tsconfig ([7efc7ee](https://github.com/LeviSchuck/tiny-packages/commit/7efc7eed69749050d00f54ea2a70c5418379f3ac))
+* Generalize type checking, add lints ([53fedf5](https://github.com/LeviSchuck/tiny-packages/commit/53fedf50034f23112b1b4703f031ed92f2b9449e))
+* Publishing should come through JSR now ([facca89](https://github.com/LeviSchuck/tiny-packages/commit/facca894b6dc4fa080c7ba0717bda757fe06be09))
+* Use the same url as provenance ([414ed7c](https://github.com/LeviSchuck/tiny-packages/commit/414ed7ca496c30c63a2f6ebf83e8340d2b917614))
+
 ## [0.0.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.6...tiny-png-v0.0.7) (2026-01-10)
 
 
