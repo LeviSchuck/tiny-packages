@@ -49,7 +49,7 @@
       ]
     },
 		"packages/tiny-html": {
-      "component": "tiny-qr-svg",
+      "component": "tiny-html",
       "release-type": "node",
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
