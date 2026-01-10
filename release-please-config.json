@@ -48,18 +48,6 @@
         }
       ]
     },
-		"packages/tiny-html": {
-      "component": "tiny-html",
-      "release-type": "node",
-      "changelog-path": "CHANGELOG.md",
-      "extra-files": [
-        {
-          "type": "json",
-          "path": "jsr.json",
-          "jsonpath": "$.version"
-        }
-      ]
-    },
     ".": {
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
