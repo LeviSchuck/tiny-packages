@@ -2,6 +2,20 @@ import { concat } from "./bytes.ts";
 import { deflate } from "./compress.ts";
 import { pngChunk } from "./pngBytes.ts";
 
+// Re-export reader functions and types
+export {
+  scanChunk,
+  iterateChunks,
+  findChunk,
+  readIHDR,
+  validatePngSignature,
+  readPngIHDR,
+  type PngChunk,
+  type ColorType,
+  type InterlaceMethod,
+  type IHDRData,
+} from "./reader.ts";
+
 /**
  * Calculate the optimal bit depth for indexed PNG based on the maximum color index
  * @param maxIndex - The highest palette index used in the image
