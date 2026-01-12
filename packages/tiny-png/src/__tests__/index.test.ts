@@ -1,5 +1,5 @@
-import { test, expect, describe, afterAll } from 'bun:test';
-import { indexedPng } from './index';
+import { test, expect, describe } from 'bun:test';
+import { indexedPng } from '../index';
 
 // Helper to check PNG signature
 function isPng(buffer: ArrayBuffer): boolean {

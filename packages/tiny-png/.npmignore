@@ -6,3 +6,4 @@ dist/**.test.js
 node_modules
 tsconfig.json
 .gitignore
+__tests__
