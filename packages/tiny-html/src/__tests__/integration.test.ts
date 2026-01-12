@@ -18,11 +18,11 @@ describe('Round-trip Tests', () => {
   });
 
   test('round-trips attributes', () => {
-    // Parser converts class to className, writer outputs as-is
+    // Parser converts class to className, default writer (eitherName) normalizes back to class
     const html = '<div class="foo">test</div>';
     const parsed = readHtml(html);
     const rendered = writeHtml(parsed);
-    expect(rendered).toBe('<div className="foo">test</div>');
+    expect(rendered).toBe('<div class="foo">test</div>');
   });
 
   test('round-trips void elements', () => {
@@ -111,8 +111,8 @@ describe('Complex HTML', () => {
     const html = '<DIV CLASS="foo"><P>Test</P></DIV>';
     const parsed = readHtml(html);
     const rendered = writeHtml(parsed);
-
-    expect(rendered).toBe('<div className="foo"><p>Test</p></div>');
+    // Default writer (eitherName) normalizes className back to class
+    expect(rendered).toBe('<div class="foo"><p>Test</p></div>');
   });
 });
 

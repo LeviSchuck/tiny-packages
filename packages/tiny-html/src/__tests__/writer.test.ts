@@ -88,7 +88,8 @@ describe('Writer - Attributes', () => {
       type: 'div',
       props: { className: 'foo' },
     };
-    expect(writeHtml(nodeObj as HtmlNode)).toBe('<div className="foo"></div>');
+    // Default eitherName normalizes className to class
+    expect(writeHtml(nodeObj as HtmlNode)).toBe('<div class="foo"></div>');
   });
 });
 
@@ -548,5 +549,106 @@ describe('getTextContent - Edge Cases', () => {
       type: 'div',
     };
     expect(getTextContent(nodeObj as HtmlNode)).toBe('');
+  });
+});
+
+describe('Writer - Attribute Naming Options', () => {
+  test('default (eitherName) converts className to class', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { className: 'foo' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode)).toBe('<div class="foo"></div>');
+  });
+
+  test('default (eitherName) converts htmlFor to for', () => {
+    const nodeObj = {
+      type: 'label',
+      props: { htmlFor: 'input-id', children: 'Label' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode)).toBe('<label for="input-id">Label</label>');
+  });
+
+  test('default (eitherName) keeps class as class', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { class: 'foo' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode)).toBe('<div class="foo"></div>');
+  });
+
+  test('default (eitherName) keeps for as for', () => {
+    const nodeObj = {
+      type: 'label',
+      props: { for: 'input-id', children: 'Label' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode)).toBe('<label for="input-id">Label</label>');
+  });
+
+  test('reactName keeps className as className', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { className: 'foo' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'reactName' })).toBe('<div className="foo"></div>');
+  });
+
+  test('reactName keeps htmlFor as htmlFor', () => {
+    const nodeObj = {
+      type: 'label',
+      props: { htmlFor: 'input-id', children: 'Label' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'reactName' })).toBe('<label htmlFor="input-id">Label</label>');
+  });
+
+  test('exactName converts className to class', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { className: 'foo' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'exactName' })).toBe('<div class="foo"></div>');
+  });
+
+  test('exactName converts htmlFor to for', () => {
+    const nodeObj = {
+      type: 'label',
+      props: { htmlFor: 'input-id', children: 'Label' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'exactName' })).toBe('<label for="input-id">Label</label>');
+  });
+
+  test('eitherName explicitly converts className to class', () => {
+    const nodeObj = {
+      type: 'div',
+      props: { className: 'foo' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'eitherName' })).toBe('<div class="foo"></div>');
+  });
+
+  test('preserves other attributes regardless of naming option', () => {
+    const nodeObj = {
+      type: 'input',
+      props: { type: 'text', id: 'my-input' },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'reactName' })).toBe('<input type="text" id="my-input" />');
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'exactName' })).toBe('<input type="text" id="my-input" />');
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'eitherName' })).toBe('<input type="text" id="my-input" />');
+  });
+
+  test('works with nested elements', () => {
+    const nodeObj = {
+      type: 'div',
+      props: {
+        className: 'outer',
+        children: {
+          type: 'span',
+          props: { className: 'inner', children: 'text' },
+        },
+      },
+    };
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'eitherName' }))
+      .toBe('<div class="outer"><span class="inner">text</span></div>');
+    expect(writeHtml(nodeObj as HtmlNode, { attributeNaming: 'reactName' }))
+      .toBe('<div className="outer"><span className="inner">text</span></div>');
   });
 });

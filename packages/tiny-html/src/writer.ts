@@ -1,7 +1,27 @@
 import { VOID_ELEMENTS, NEVER_SELF_CLOSE } from './constants.ts';
 import { encodeHtmlEntities, escapeCData } from './entities.ts';
 import { toKebabCase } from './utils.ts';
-import type { HtmlNode, HtmlElement, WriterOptions, ParseResult, HtmlStyle, Namespace } from './types.ts';
+import type { HtmlNode, HtmlElement, WriterOptions, ParseResult, HtmlStyle, Namespace, WriterAttributeNaming } from './types.ts';
+
+// Map React-style attribute names to HTML names
+const REACT_TO_HTML_ATTR: Record<string, string> = {
+  'className': 'class',
+  'htmlFor': 'for',
+};
+
+function normalizeAttrNameForWrite(name: string, naming: WriterAttributeNaming): string {
+  if (naming === 'reactName') {
+    // Keep as-is
+    return name;
+  }
+
+  if (naming === 'exactName' || naming === 'eitherName') {
+    // Normalize React names to HTML names
+    return REACT_TO_HTML_ATTR[name] ?? name;
+  }
+
+  return name;
+}
 
 export function renderHtml(input: HtmlNode | ParseResult, options: WriterOptions = {}): string {
   const chunks: string[] = [];
@@ -44,8 +64,9 @@ export function renderHtml(input: HtmlNode | ParseResult, options: WriterOptions
   const useCDataForScripts = options.useCDataForScripts ?? false;
   const useCDataForStyles = options.useCDataForStyles ?? false;
   const voidTrailingSlash = options.voidTrailingSlash ?? true;
+  const attributeNaming: WriterAttributeNaming = options.attributeNaming ?? 'eitherName';
 
-  renderNode(node, chunks, 'HTML' as Namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash);
+  renderNode(node, chunks, 'HTML' as Namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming);
 
   return chunks.join('');
 }
@@ -56,7 +77,8 @@ function renderNode(
   namespace: Namespace,
   useCDataForScripts: boolean,
   useCDataForStyles: boolean,
-  voidTrailingSlash: boolean
+  voidTrailingSlash: boolean,
+  attributeNaming: WriterAttributeNaming
 ): void {
   if (node === null || node === undefined) {
     return;
@@ -79,7 +101,7 @@ function renderNode(
 
   if (Array.isArray(node)) {
     for (const child of node) {
-      renderNode(child, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash);
+      renderNode(child, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming);
     }
     return;
   }
@@ -100,7 +122,7 @@ function renderNode(
   // Must be ReactElement
   if (node && typeof node === 'object' && 'type' in node && 'props' in node) {
     const element = node as HtmlElement;
-    renderElement(element, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash);
+    renderElement(element, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming);
     return;
   }
 
@@ -113,7 +135,8 @@ function renderElement(
   namespace: Namespace,
   useCDataForScripts: boolean,
   useCDataForStyles: boolean,
-  voidTrailingSlash: boolean
+  voidTrailingSlash: boolean,
+  attributeNaming: WriterAttributeNaming
 ): void {
   const tagName = element.type;
 
@@ -139,10 +162,12 @@ function renderElement(
         continue;
       }
 
+      const attrName = normalizeAttrNameForWrite(key, attributeNaming);
+
       if (value === true) {
         // Boolean attribute
         chunks.push(' ');
-        chunks.push(key);
+        chunks.push(attrName);
       } else if (key === 'style' && typeof value === 'object') {
         // Style object
         const styleStr = renderStyle(value as HtmlStyle);
@@ -154,7 +179,7 @@ function renderElement(
       } else {
         // String, number, or other value
         chunks.push(' ');
-        chunks.push(key);
+        chunks.push(attrName);
         chunks.push('="');
         chunks.push(encodeHtmlEntities(String(value), true));
         chunks.push('"');
@@ -194,17 +219,17 @@ function renderElement(
     // Special handling for script/style with CDATA
     if (tagName === 'script' && useCDataForScripts) {
       chunks.push('<![CDATA[');
-      renderNodeContent(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, true);
+      renderNodeContent(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming, true);
       chunks.push(']]>');
     } else if (tagName === 'style' && useCDataForStyles) {
       chunks.push('<![CDATA[');
-      renderNodeContent(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, true);
+      renderNodeContent(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming, true);
       chunks.push(']]>');
     } else if (tagName === 'script' || tagName === 'style') {
       // Script and style content should not be entity-encoded
       renderRawContent(childrenNode, chunks);
     } else {
-      renderNode(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash);
+      renderNode(childrenNode, chunks, currentNamespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming);
     }
 
     chunks.push('</');
@@ -230,6 +255,7 @@ function renderNodeContent(
   useCDataForScripts: boolean,
   useCDataForStyles: boolean,
   voidTrailingSlash: boolean,
+  attributeNaming: WriterAttributeNaming,
   insideCData: boolean
 ): void {
   if (node === null || node === undefined) {
@@ -252,13 +278,13 @@ function renderNodeContent(
 
   if (Array.isArray(node)) {
     for (const child of node) {
-      renderNodeContent(child, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, insideCData);
+      renderNodeContent(child, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming, insideCData);
     }
     return;
   }
 
   // For elements inside CDATA, just render normally
-  renderNode(node, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash);
+  renderNode(node, chunks, namespace, useCDataForScripts, useCDataForStyles, voidTrailingSlash, attributeNaming);
 }
 
 function renderRawContent(node: HtmlNode, chunks: string[]): void {

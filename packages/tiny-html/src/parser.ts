@@ -15,9 +15,12 @@ import type {
   ElementStackEntry,
   HtmlStyle,
   HtmlProps,
+  ParserOptions,
+  ParserAttributeNaming,
 } from './types.ts';
 
-export function parseHtml(html: string): ParseResult {
+export function parseHtml(html: string, options: ParserOptions = {}): ParseResult {
+  const attributeNaming: ParserAttributeNaming = options.attributeNaming ?? 'reactName';
   const encoder = new TextEncoder();
   const bytes = encoder.encode(html);
 
@@ -71,9 +74,13 @@ export function parseHtml(html: string): ParseResult {
   function normalizeAttrName(name: string, namespace: Namespace): string {
     const lower = name.toLowerCase();
 
-    // Special React attributes - preserve exact casing
-    if (lower === 'class') return 'className';
-    if (lower === 'for') return 'htmlFor';
+    // Special attributes - handle based on naming option
+    if (lower === 'class') {
+      return attributeNaming === 'exactName' ? 'class' : 'className';
+    }
+    if (lower === 'for') {
+      return attributeNaming === 'exactName' ? 'for' : 'htmlFor';
+    }
 
     if (namespace === 'SVG' as Namespace) {
       // Check if it's a known SVG attribute that needs case correction
@@ -86,12 +93,7 @@ export function parseHtml(html: string): ParseResult {
 
     // Convert to camelCase for HTML attributes
     if (namespace === 'HTML' as Namespace) {
-      const camelCased = toCamelCase(lower);
-      // Special case: preserve className, htmlFor as-is
-      if (lower === 'class' || lower === 'for') {
-        return lower === 'class' ? 'className' : 'htmlFor';
-      }
-      return camelCased;
+      return toCamelCase(lower);
     }
 
     return lower;

@@ -277,3 +277,53 @@ describe('Parser - Style Attribute', () => {
     expect((result.node as any).props.style.background).toContain('url(');
   });
 });
+
+describe('Parser - Attribute Naming Options', () => {
+  test('default (reactName) converts class to className', () => {
+    const result = readHtml('<div class="test"></div>');
+    expect((result.node as any).props.className).toBe('test');
+    expect((result.node as any).props.class).toBeUndefined();
+  });
+
+  test('default (reactName) converts for to htmlFor', () => {
+    const result = readHtml('<label for="input-id">Label</label>');
+    expect((result.node as any).props.htmlFor).toBe('input-id');
+    expect((result.node as any).props.for).toBeUndefined();
+  });
+
+  test('reactName option converts class to className', () => {
+    const result = readHtml('<div class="test"></div>', { attributeNaming: 'reactName' });
+    expect((result.node as any).props.className).toBe('test');
+    expect((result.node as any).props.class).toBeUndefined();
+  });
+
+  test('reactName option converts for to htmlFor', () => {
+    const result = readHtml('<label for="input-id">Label</label>', { attributeNaming: 'reactName' });
+    expect((result.node as any).props.htmlFor).toBe('input-id');
+    expect((result.node as any).props.for).toBeUndefined();
+  });
+
+  test('exactName option keeps class as class', () => {
+    const result = readHtml('<div class="test"></div>', { attributeNaming: 'exactName' });
+    expect((result.node as any).props.class).toBe('test');
+    expect((result.node as any).props.className).toBeUndefined();
+  });
+
+  test('exactName option keeps for as for', () => {
+    const result = readHtml('<label for="input-id">Label</label>', { attributeNaming: 'exactName' });
+    expect((result.node as any).props.for).toBe('input-id');
+    expect((result.node as any).props.htmlFor).toBeUndefined();
+  });
+
+  test('exactName preserves other attributes normally', () => {
+    const result = readHtml('<input type="text" id="my-input" />', { attributeNaming: 'exactName' });
+    expect((result.node as any).props.type).toBe('text');
+    expect((result.node as any).props.id).toBe('my-input');
+  });
+
+  test('reactName preserves other attributes normally', () => {
+    const result = readHtml('<input type="text" id="my-input" />', { attributeNaming: 'reactName' });
+    expect((result.node as any).props.type).toBe('text');
+    expect((result.node as any).props.id).toBe('my-input');
+  });
+});
