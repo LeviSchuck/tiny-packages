@@ -35,6 +35,11 @@ export type ColorType =
 export type InterlaceMethod = "none" | "adam7";
 
 /**
+ * Bits per sample or palette index (1, 2, 4, 8, or 16)
+ */
+export type BitDepth = 1 | 2 | 4 | 8 | 16;
+
+/**
  * Parsed IHDR (Image Header) chunk data
  */
 export interface IHDRData {
@@ -43,7 +48,7 @@ export interface IHDRData {
   /** Image height in pixels */
   height: number;
   /** Bits per sample or palette index (1, 2, 4, 8, or 16) */
-  bitDepth: 1 | 2 | 4 | 8 | 16;
+  bitDepth: BitDepth;
   /** Color type of the image */
   colorType: ColorType;
   /** Compression method (always 'deflate' for valid PNGs) */
@@ -94,7 +99,7 @@ function parseInterlaceMethod(value: number): InterlaceMethod {
 function validateBitDepth(
   bitDepth: number,
   colorType: number
-): bitDepth is 1 | 2 | 4 | 8 | 16 {
+): bitDepth is BitDepth {
   const validCombinations: Record<number, number[]> = {
     0: [1, 2, 4, 8, 16], // Greyscale
     2: [8, 16], // Truecolor
@@ -248,7 +253,7 @@ export function readIHDR(data: DataView): IHDRData {
   return {
     width,
     height,
-    bitDepth: bitDepth as 1 | 2 | 4 | 8 | 16,
+    bitDepth: bitDepth as BitDepth,
     colorType,
     compressionMethod: "deflate",
     filterMethod: "adaptive",
@@ -291,7 +296,7 @@ export function readPngIHDR(data: Uint8Array | ArrayBuffer): IHDRData {
   const buffer = data instanceof Uint8Array ? data.buffer : data;
   const byteOffset = data instanceof Uint8Array ? data.byteOffset : 0;
   const byteLength = data instanceof Uint8Array ? data.byteLength : data.byteLength;
-  
+
   const view = new DataView(buffer, byteOffset, byteLength);
 
   // Validate PNG signature

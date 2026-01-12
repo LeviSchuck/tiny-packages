@@ -1,6 +1,7 @@
 import { concat } from "./bytes.ts";
 import { deflate } from "./compress.ts";
 import { pngChunk } from "./pngBytes.ts";
+import { calculateBitDepth, packPixelData } from "./writer.ts";
 
 // Re-export reader functions and types
 export {
@@ -15,54 +16,6 @@ export {
   type InterlaceMethod,
   type IHDRData,
 } from "./reader.ts";
-
-/**
- * Calculate the optimal bit depth for indexed PNG based on the maximum color index
- * @param maxIndex - The highest palette index used in the image
- * @returns The bit depth (1, 2, 4, or 8)
- */
-function calculateBitDepth(maxIndex: number): 1 | 2 | 4 | 8 {
-  if (maxIndex <= 1) return 1;
-  if (maxIndex <= 3) return 2;
-  if (maxIndex <= 15) return 4;
-  return 8;
-}
-
-/**
- * Pack pixel indices into bytes according to the specified bit depth
- * @param inputView - DataView of original pixel data (1 byte per pixel)
- * @param width - Image width in pixels
- * @param height - Image height in pixels
- * @param bitDepth - Target bit depth (1, 2, 4, or 8)
- * @returns Packed image data with filter bytes for each row
- */
-function packPixelData(
-  inputView: DataView,
-  width: number,
-  height: number,
-  bitDepth: 1 | 2 | 4 | 8
-): Uint8Array<ArrayBuffer> {
-  const pixelsPerByte = 8 / bitDepth;
-  const bytesPerRow = Math.ceil(width / pixelsPerByte);
-  const stride = bytesPerRow + 1; // +1 for filter byte
-  const packed = new Uint8Array(stride * height);
-  const packedView = new DataView(packed.buffer);
-
-  for (let y = 0; y < height; y++) {
-    // Set filter byte to 0 (None)
-    packedView.setUint8(y * stride, 0);
-
-    for (let x = 0; x < width; x++) {
-      const pixelValue = inputView.getUint8(y * width + x);
-      const byteIndex = y * stride + 1 + Math.floor(x / pixelsPerByte);
-      const bitPosition = (pixelsPerByte - 1 - (x % pixelsPerByte)) * bitDepth;
-      const currentValue = packedView.getUint8(byteIndex);
-      packedView.setUint8(byteIndex, currentValue | (pixelValue << bitPosition));
-    }
-  }
-
-  return packed;
-}
 
 /**
  * Generate an indexed-color PNG image, up to 256 colors are supported
@@ -146,6 +99,19 @@ export async function indexedPng(
     plteDataView.setUint8(i * 3 + 2, colors[i]![2]);
   }
   const plte = pngChunk("PLTE", plteData);
+
+	// Future note: If adding transparency support, a tRNS chunk is needed here.
+	// https://www.w3.org/TR/png-3/#11tRNS
+	// For color type 3 (indexed-color), the tRNS chunk contains a series of one-byte alpha values,
+	// corresponding to entries in the PLTE chunk. Each entry indicates that pixels of the
+	// corresponding palette index shall be treated as having the specified alpha value.
+	// Alpha values have the same interpretation as in an 8-bit full alpha channel: 0 is fully
+	// transparent, 255 is fully opaque, regardless of image bit depth. The tRNS chunk shall not
+	// contain more alpha values than there are palette entries, but a tRNS chunk may contain fewer
+	// values than there are palette entries. In this case, the alpha value for all remaining
+	// palette entries is assumed to be 255. In the common case in which only palette index 0
+	// need be made transparent, only a one-byte tRNS chunk is needed, and when all palette
+	// indices are opaque, the tRNS chunk may be omitted.
 
   // Pack pixel data according to bit depth
   const uncompressed = packPixelData(inputView, width, height, bitDepth);
