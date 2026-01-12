@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.2.0...tiny-packages-v1.2.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* Add convenience htmlNodeToHtmlElement function ([ae46552](https://github.com/LeviSchuck/tiny-packages/commit/ae46552b54fdde5b0c5676fc203f4314fdd662de))
+
 ## [1.2.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.1.0...tiny-packages-v1.2.0) (2026-01-12)
 
 

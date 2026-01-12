@@ -3,6 +3,6 @@
   "packages/tiny-qr": "0.0.8",
   "packages/tiny-qr-png": "0.0.10",
   "packages/tiny-qr-svg": "0.0.8",
-  "packages/tiny-html": "0.1.0",
-  ".": "1.2.0"
+  "packages/tiny-html": "0.1.1",
+  ".": "1.2.1"
 }
