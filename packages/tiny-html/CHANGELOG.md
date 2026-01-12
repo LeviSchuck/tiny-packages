@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.4...tiny-html-v0.1.0) (2026-01-12)
+
+
+### Features
+
+* Safe HTML sanitization ([59b6cc8](https://github.com/LeviSchuck/tiny-packages/commit/59b6cc809eb9324aaaceea00ebb8473b88fbc98f))
+
 ## [0.0.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.0.3...tiny-html-v0.0.4) (2026-01-10)
 
 

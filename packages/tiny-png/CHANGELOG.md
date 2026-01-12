@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.1.0...tiny-png-v0.2.0) (2026-01-12)
+
+
+### Features
+
+* Read PNG Headers ([3a1d81e](https://github.com/LeviSchuck/tiny-packages/commit/3a1d81ef1b7376105fc4fa5c6c46cc923b8ee152))
+
 ## [0.1.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-png-v0.0.8...tiny-png-v0.1.0) (2026-01-10)
 
 

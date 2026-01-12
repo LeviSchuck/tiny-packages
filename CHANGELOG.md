@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.1.0...tiny-packages-v1.2.0) (2026-01-12)
+
+
+### Features
+
+* Read PNG Headers ([3a1d81e](https://github.com/LeviSchuck/tiny-packages/commit/3a1d81ef1b7376105fc4fa5c6c46cc923b8ee152))
+* Safe HTML sanitization ([59b6cc8](https://github.com/LeviSchuck/tiny-packages/commit/59b6cc809eb9324aaaceea00ebb8473b88fbc98f))
+
 ## [1.1.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.0.14...tiny-packages-v1.1.0) (2026-01-10)
 
 
