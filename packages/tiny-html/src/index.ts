@@ -62,6 +62,7 @@ export { htmlNodeTo } from './convert.ts';
 export { decodeHtmlEntities, encodeHtmlEntities } from './entities.ts';
 export type { CreateElementFn, CreateElementProps } from './convert.ts';
 export { getTextContent } from './writer.ts';
+export { htmlNodeToHtmlElement } from './utils.ts';
 
 // Re-export public types
 export type {

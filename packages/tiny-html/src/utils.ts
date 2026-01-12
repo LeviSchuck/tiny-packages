@@ -1,3 +1,6 @@
+import { parseHtml } from "./parser.ts";
+import type { HtmlElement, HtmlNode } from "./types.ts";
+
 /**
  * Converts a kebab-case or snake_case string to camelCase
  * @example toCamelCase("foo-bar") => "fooBar"
@@ -66,4 +69,31 @@ export function isNameChar(code: number): boolean {
     code === 0x5F || // _
     code === 0x3A    // :
   );
+}
+
+/**
+ * Find the first HtmlElement in the HtmlNode, may be an html string.
+ *
+ * @param node - the result of readHtml or a string of HTML
+ * @returns the first HtmlElement in the HtmlNode
+ * @throws an error if no HtmlElement is found
+ */
+export function htmlNodeToHtmlElement(node: HtmlNode): HtmlElement {
+	if (typeof node === 'string' && node.trim().startsWith('<')) {
+		// Automatically parse strings of html into HtmlElement
+		const parsedResult = parseHtml(node);
+		node = parsedResult.node;
+	}
+	if (typeof node === 'object' && !!node && 'type' in node) {
+		return node as HtmlElement;
+	}
+	if (Array.isArray(node)) {
+		// Find the first HtmlElement in the array
+		for (const child of node) {
+			if (typeof child === 'object' && !!child && 'type' in child) {
+				return child as HtmlElement;
+			}
+		}
+	}
+	throw new Error('Could not find HtmlElement in decoded Html');
 }
