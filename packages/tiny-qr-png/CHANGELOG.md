@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.11](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-png-v0.0.10...tiny-qr-png-v0.0.11) (2026-01-15)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @levischuck/tiny-qr bumped to 0.0.9
+
 ## [0.0.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-png-v0.0.9...tiny-qr-png-v0.0.10) (2026-01-12)
 
 
