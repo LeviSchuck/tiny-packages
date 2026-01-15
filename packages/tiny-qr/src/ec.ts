@@ -30,23 +30,55 @@ const LOG_TABLE = new Uint8Array([
   230, 231, 173, 232, 116, 214, 244, 234, 168, 80, 88, 175,
 ]);
 
+// GF(256) multiplication helper
+function gfMul(a: number, b: number): number {
+  if (a === 0 || b === 0) return 0;
+  return EXP_TABLE[(LOG_TABLE[a]! + LOG_TABLE[b]!) % 255]!;
+}
+
+// Compute generator polynomial for n EC codewords
+// The polynomial is (x + α^0)(x + α^1)...(x + α^{n-1})
+// Returns coefficients in log form, excluding the implicit leading 1
+function computeGeneratorPolynomial(n: number): Uint8Array {
+  // Start with g_1(x) = x + α^0 = x + 1, stored as [1] (constant term)
+  let poly = new Uint8Array([1]);
+
+  for (let i = 1; i < n; i++) {
+    // Multiply by (x + α^i)
+    const alphaI = EXP_TABLE[i]!;
+    const newPoly = new Uint8Array(poly.length + 1);
+
+    // New highest degree coefficient (excluding implicit leading 1)
+    newPoly[0] = poly[0]! ^ alphaI;
+
+    // Middle coefficients
+    for (let j = 1; j < poly.length; j++) {
+      newPoly[j] = poly[j]! ^ gfMul(alphaI, poly[j - 1]!);
+    }
+
+    // New constant term
+    newPoly[poly.length] = gfMul(alphaI, poly[poly.length - 1]!);
+
+    poly = newPoly;
+  }
+
+  // Convert to log form
+  const logPoly = new Uint8Array(poly.length);
+  for (let i = 0; i < poly.length; i++) {
+    logPoly[i] = LOG_TABLE[poly[i]!]!;
+  }
+
+  return logPoly;
+}
+
 // Generator polynomials table
 const GENERATOR_POLYNOMIALS: Uint8Array[] = [];
 function initGeneratorPolynomials() {
   if (GENERATOR_POLYNOMIALS.length > 0) return;
   GENERATOR_POLYNOMIALS.push(new Uint8Array([]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([0]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([25, 1]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([198, 199, 3]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([75, 249, 78, 6]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([113, 164, 166, 119, 10]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([166, 0, 134, 5, 176, 15]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([87, 229, 146, 149, 238, 102, 21]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([175, 238, 208, 249, 215, 252, 196, 28]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([95, 246, 137, 231, 235, 149, 11, 123, 36]));
-  GENERATOR_POLYNOMIALS.push(new Uint8Array([251, 67, 46, 61, 118, 70, 64, 94, 32, 45]));
-  for (let i = 11; i <= 68; i++) {
-    GENERATOR_POLYNOMIALS.push(new Uint8Array(i));
+  // Compute all generator polynomials dynamically
+  for (let i = 1; i <= 68; i++) {
+    GENERATOR_POLYNOMIALS.push(computeGeneratorPolynomial(i));
   }
 }
 initGeneratorPolynomials();
