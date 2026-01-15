@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.8...tiny-qr-v0.0.9) (2026-01-15)
+
+
+### Bug Fixes
+
+* Dynamically generate reed solomon codes ([f1b69a0](https://github.com/LeviSchuck/tiny-packages/commit/f1b69a001cd1f8685af1dc51ebc87f09e5759f93))
+
 ## [0.0.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.7...tiny-qr-v0.0.8) (2026-01-10)
 
 

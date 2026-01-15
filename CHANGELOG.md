@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.2.1...tiny-packages-v1.2.2) (2026-01-15)
+
+
+### Bug Fixes
+
+* Dynamically generate reed solomon codes ([f1b69a0](https://github.com/LeviSchuck/tiny-packages/commit/f1b69a001cd1f8685af1dc51ebc87f09e5759f93))
+
 ## [1.2.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.2.0...tiny-packages-v1.2.1) (2026-01-12)
 
 
