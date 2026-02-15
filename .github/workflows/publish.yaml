@@ -22,21 +22,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '25'
-          registry-url: 'https://registry.npmjs.org'
       - name: Ensure npm >= 11.5.1 for OIDC
         run: npm install -g npm@latest
-      - name: Strip auth token from .npmrc for OIDC
-        run: |
-          echo "--- Before ---"
-          cat "$NPM_CONFIG_USERCONFIG"
-          sed -i '/_authToken/d' "$NPM_CONFIG_USERCONFIG"
-          echo "--- After ---"
-          cat "$NPM_CONFIG_USERCONFIG"
-
       - name: Install dependencies
         run: bun install
       - name: Publish all packages to NPM
         run: ./scripts/publish-all-npm.sh
+        env:
+          NODE_AUTH_TOKEN: ''
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
       - name: Publish all packages to JSR
