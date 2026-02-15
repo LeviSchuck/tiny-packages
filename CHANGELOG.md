@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.1...tiny-packages-v1.3.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* copy .npmrc into npm_build for OIDC auth discovery ([10be107](https://github.com/LeviSchuck/tiny-packages/commit/10be107d98c74445fc06a9019465e58500b2d34a))
+
 ## [1.3.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.0...tiny-packages-v1.3.1) (2026-02-15)
 
 
