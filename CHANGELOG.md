@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.8...tiny-packages-v1.3.9) (2026-02-15)
+
+
+### Bug Fixes
+
+* strip _authToken from NPM_CONFIG_USERCONFIG for OIDC fallback ([4921358](https://github.com/LeviSchuck/tiny-packages/commit/4921358f02d189e4da5bfe54101d101b3a62de95))
+
 ## [1.3.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.7...tiny-packages-v1.3.8) (2026-02-15)
 
 
