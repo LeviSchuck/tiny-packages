@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.9...tiny-packages-v1.3.10) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to enable npm OIDC publishing ([f02288a](https://github.com/LeviSchuck/tiny-packages/commit/f02288a670c43f45ca3f9dfd00c58eb9e3675fed))
+
 ## [1.3.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.8...tiny-packages-v1.3.9) (2026-02-15)
 
 
