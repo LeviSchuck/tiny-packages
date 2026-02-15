@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.11](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.10...tiny-packages-v1.3.11) (2026-02-15)
+
+
+### Bug Fixes
+
+* add OIDC debug logging to diagnose npm publish failure ([2190860](https://github.com/LeviSchuck/tiny-packages/commit/21908608e73432501072ff7fa542bd55b24c6da1))
+
 ## [1.3.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.9...tiny-packages-v1.3.10) (2026-02-15)
 
 
