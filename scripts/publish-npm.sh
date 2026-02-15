@@ -117,8 +117,8 @@ fi
 
 # Build the package (prepublishOnly will also build, but this ensures dry-run works)
 echo "Publishing $NPM_PACKAGE_NAME to npm (version $LOCAL_VERSION)..."
-echo npm publish $DRY $PROV
-npm publish $DRY $PROV
+echo NODE_AUTH_TOKEN="" npm publish $DRY $PROV --access public
+NODE_AUTH_TOKEN="" npm publish $DRY $PROV --access public
 
 # Clean up
 cd "$PACKAGE_DIR"

@@ -25,13 +25,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Ensure npm >= 11.5.1 for OIDC
         run: npm install -g npm@latest
-      - name: Strip token from .npmrc so npm falls through to OIDC
-        run: |
-          sed -i '/_authToken/d' "$GITHUB_WORKSPACE/.npmrc"
-          echo "--- .npmrc contents ---"
-          cat "$GITHUB_WORKSPACE/.npmrc"
-          echo "--- npm config list ---"
-          npm config list
 
       - name: Install dependencies
         run: bun install
