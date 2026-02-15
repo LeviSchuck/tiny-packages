@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.5...tiny-packages-v1.3.6) (2026-02-15)
+
+
+### Bug Fixes
+
+* clear NODE_AUTH_TOKEN to prevent OIDC bypass ([a1bfbd2](https://github.com/LeviSchuck/tiny-packages/commit/a1bfbd212eb3e351c96149a09447645b82560020))
+
 ## [1.3.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.4...tiny-packages-v1.3.5) (2026-02-15)
 
 
