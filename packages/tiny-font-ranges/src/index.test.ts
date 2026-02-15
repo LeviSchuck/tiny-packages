@@ -1,4 +1,4 @@
-import { test, expect } from "bun:test";
+import { test, expect, describe } from "bun:test";
 import {
 	ALL_FONTS,
 	WITHOUT_LATIN,
@@ -10,7 +10,10 @@ import {
 	CHINESE,
 	scanTextForFontRanges,
 	parseUnicodeRange,
+	deduplicateFonts,
 } from "./index.ts";
+import { formatHex, formatRange, subtractRange } from "./dedupe.ts";
+import type { FontRange } from "./types.ts";
 
 test("ALL_FONTS contains 21 fonts", () => {
 	expect(ALL_FONTS).toHaveLength(21);
@@ -78,7 +81,8 @@ test("scanTextForFontRanges matches Korean text", () => {
 });
 
 test("scanTextForFontRanges matches Arabic text", () => {
-	const result = scanTextForFontRanges("مرحبا", ALL_FONTS);
+	// Uses chars from Arabic's own range (060D-0626) not claimed by Math
+	const result = scanTextForFontRanges("ءآأ", ALL_FONTS);
 	expect(result).toContain("Noto Sans Arabic");
 });
 
@@ -90,4 +94,148 @@ test("scanTextForFontRanges matches emoji", () => {
 test("scanTextForFontRanges returns no duplicates", () => {
 	const result = scanTextForFontRanges("こんにちは世界テスト", ALL_FONTS);
 	expect(new Set(result).size).toBe(result.length);
+});
+
+// --- dedupe tests ---
+
+describe("formatHex", () => {
+	test("pads BMP codepoints to 4 hex chars", () => {
+		expect(formatHex(0x0020)).toBe("0020");
+		expect(formatHex(0x007E)).toBe("007E");
+		expect(formatHex(0xFFFF)).toBe("FFFF");
+	});
+
+	test("pads supplementary codepoints to 5 hex chars", () => {
+		expect(formatHex(0x10000)).toBe("10000");
+		expect(formatHex(0x1F600)).toBe("1F600");
+		expect(formatHex(0x10780)).toBe("10780");
+	});
+
+	test("handles zero", () => {
+		expect(formatHex(0)).toBe("0000");
+	});
+});
+
+describe("formatRange", () => {
+	test("formats a range with different start and end", () => {
+		expect(formatRange(0x2190, 0x2195)).toBe("2190-2195");
+	});
+
+	test("formats a single codepoint as start-end", () => {
+		expect(formatRange(0x20E3, 0x20E3)).toBe("20E3-20E3");
+	});
+
+	test("formats supplementary ranges", () => {
+		expect(formatRange(0x1F600, 0x1F64F)).toBe("1F600-1F64F");
+	});
+});
+
+describe("subtractRange", () => {
+	test("returns base unchanged when no overlap", () => {
+		expect(subtractRange([10, 20], [30, 40])).toEqual([[10, 20]]);
+	});
+
+	test("returns base unchanged when remove is entirely before", () => {
+		expect(subtractRange([30, 40], [10, 20])).toEqual([[30, 40]]);
+	});
+
+	test("returns empty when base is fully removed", () => {
+		expect(subtractRange([10, 20], [5, 25])).toEqual([]);
+	});
+
+	test("returns empty when base equals remove", () => {
+		expect(subtractRange([10, 20], [10, 20])).toEqual([]);
+	});
+
+	test("trims left (remove overlaps start)", () => {
+		expect(subtractRange([10, 20], [5, 15])).toEqual([[16, 20]]);
+	});
+
+	test("trims right (remove overlaps end)", () => {
+		expect(subtractRange([10, 20], [15, 25])).toEqual([[10, 14]]);
+	});
+
+	test("punches middle hole — returns two fragments", () => {
+		expect(subtractRange([10, 30], [15, 20])).toEqual([
+			[10, 14],
+			[21, 30],
+		]);
+	});
+});
+
+describe("deduplicateFonts", () => {
+	test("gives priority to earlier font in list", () => {
+		const fonts: FontRange[] = [
+			{ ranges: ["0010-0020"], family: "First" },
+			{ ranges: ["0015-0025"], family: "Second" },
+		];
+		const result = deduplicateFonts(fonts);
+		expect(result).toEqual([
+			{ ranges: ["0010-0020"], family: "First" },
+			{ ranges: ["0021-0025"], family: "Second" },
+		]);
+	});
+
+	test("removes font entirely when all ranges are claimed", () => {
+		const fonts: FontRange[] = [
+			{ ranges: ["0010-0030"], family: "First" },
+			{ ranges: ["0015-0020"], family: "Second" },
+		];
+		const result = deduplicateFonts(fonts);
+		expect(result).toHaveLength(1);
+		expect(result[0]!.family).toBe("First");
+	});
+
+	test("handles non-overlapping fonts", () => {
+		const fonts: FontRange[] = [
+			{ ranges: ["0010-0020"], family: "First" },
+			{ ranges: ["0030-0040"], family: "Second" },
+		];
+		const result = deduplicateFonts(fonts);
+		expect(result).toEqual(fonts);
+	});
+
+	test("splits range when middle is claimed", () => {
+		const fonts: FontRange[] = [
+			{ ranges: ["0015-0020"], family: "First" },
+			{ ranges: ["0010-0030"], family: "Second" },
+		];
+		const result = deduplicateFonts(fonts);
+		expect(result).toEqual([
+			{ ranges: ["0015-0020"], family: "First" },
+			{ ranges: ["0010-0014", "0021-0030"], family: "Second" },
+		]);
+	});
+});
+
+describe("ALL_FONTS integration", () => {
+	test("no overlapping ranges across all fonts", () => {
+		const allRanges: { start: number; end: number; family: string }[] = [];
+		for (const font of ALL_FONTS) {
+			for (const range of font.ranges) {
+				const parsed = parseUnicodeRange(range);
+				if (!parsed) continue;
+				allRanges.push({ start: parsed[0], end: parsed[1], family: font.family });
+			}
+		}
+
+		allRanges.sort((a, b) => a.start - b.start || a.end - b.end);
+
+		for (let i = 1; i < allRanges.length; i++) {
+			const prev = allRanges[i - 1]!;
+			const curr = allRanges[i]!;
+			if (curr.start <= prev.end) {
+				throw new Error(
+					`Overlap: ${prev.family} [${formatRange(prev.start, prev.end)}] ` +
+					`and ${curr.family} [${formatRange(curr.start, curr.end)}]`,
+				);
+			}
+		}
+	});
+
+	test("deduplicateFonts is idempotent", () => {
+		const once = deduplicateFonts(ALL_FONTS);
+		const twice = deduplicateFonts(once);
+		expect(twice).toEqual(once);
+	});
 });

@@ -1,6 +1,6 @@
 export const MUSIC: { ranges: string[]; family: string } = {
   "ranges": [
-    "2669-266F",
+    "2669-266C",
     "1D000-1D0F5",
     "1D100-1D126",
     "1D129-1D1EA",

@@ -1,5 +1,6 @@
 export type { FontRange } from "./types.ts";
 export { parseUnicodeRange, scanTextForFontRanges } from "./scan.ts";
+export { deduplicateFonts } from "./dedupe.ts";
 
 export { NOTO } from "./noto.ts";
 export { EMOJI } from "./emoji.ts";

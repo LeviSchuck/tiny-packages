@@ -1,7 +1,7 @@
 export const EMOJI: { ranges: string[]; family: string } = {
   "ranges": [
     "20E3-20E3",
-    "2194-2199",
+    "2196-2199",
     "21A9-21AA",
     "231A-231B",
     "2328-2328",
