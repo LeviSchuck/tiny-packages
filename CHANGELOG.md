@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.7...tiny-packages-v1.3.8) (2026-02-15)
+
+
+### Bug Fixes
+
+* use NODE_AUTH_TOKEN="" inline for npm OIDC trusted publishing ([37abb49](https://github.com/LeviSchuck/tiny-packages/commit/37abb49925abc63fac6b1822b0fa56ae684be9ab))
+
 ## [1.3.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.6...tiny-packages-v1.3.7) (2026-02-15)
 
 
