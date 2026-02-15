@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.2...tiny-packages-v1.3.3) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to allow OIDC auth fallback ([ef4b448](https://github.com/LeviSchuck/tiny-packages/commit/ef4b448a25dfbd62005af023bcb1e590578a1cb7))
+
 ## [1.3.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.1...tiny-packages-v1.3.2) (2026-02-15)
 
 
