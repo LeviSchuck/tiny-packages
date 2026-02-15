@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.12](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.11...tiny-packages-v1.3.12) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove debug logging from publish workflow ([e28058e](https://github.com/LeviSchuck/tiny-packages/commit/e28058e05ef6dffe1df158d715446d489e1ea599))
+
 ## [1.3.11](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.10...tiny-packages-v1.3.11) (2026-02-15)
 
 
