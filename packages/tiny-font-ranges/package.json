@@ -1,0 +1,47 @@
+{
+  "name": "@levischuck/tiny-font-ranges",
+  "version": "0.0.1",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeviSchuck/tiny-packages",
+    "directory": "packages/tiny-font-ranges"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "keywords": [
+    "font",
+    "unicode",
+    "ranges",
+    "noto"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "bun run build",
+    "type-check": "bunx tsc --noEmit",
+    "build:jsr": "echo Nothing to build",
+    "lint": "oxlint -c ../../.oxlintrc.json"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

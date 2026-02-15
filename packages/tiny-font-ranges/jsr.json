@@ -1,0 +1,21 @@
+{
+  "name": "@levischuck/tiny-font-ranges",
+  "version": "0.0.1",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "publish": {
+    "exclude": [
+      "!./",
+      "dist",
+      "node_modules",
+      "vite.config.ts",
+      "package.json",
+      "CHANGELOG.md",
+      "tsconfig.json",
+      "bun.lock",
+      "src/*.test.ts"
+    ]
+  }
+}
