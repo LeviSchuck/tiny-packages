@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.3...tiny-packages-v1.3.4) (2026-02-15)
+
+
+### Bug Fixes
+
+* restore registry-url for OIDC discovery and ensure npm &gt;= 11.5.1 ([857c306](https://github.com/LeviSchuck/tiny-packages/commit/857c3068c6d2d67e58990f502fb5d2fe387a94ae))
+
 ## [1.3.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.2...tiny-packages-v1.3.3) (2026-02-15)
 
 
