@@ -82,6 +82,8 @@ cp package.json "$NPM_BUILD_DIR/"
 cp README.md "$NPM_BUILD_DIR/" 2>/dev/null || true
 cp tsconfig.json "$NPM_BUILD_DIR/" 2>/dev/null || true
 cp vite.config.ts "$NPM_BUILD_DIR/" 2>/dev/null || true
+# Copy .npmrc for OIDC auth (from workspace root where setup-node places it)
+cp "$PROJECT_ROOT/.npmrc" "$NPM_BUILD_DIR/" 2>/dev/null || true
 
 # Change to npm_build directory
 cd "$NPM_BUILD_DIR"
