@@ -1,0 +1,8 @@
+vite.config.ts
+src
+dist/**.test.ts
+dist/**.test.d.ts
+dist/**.test.js
+node_modules
+tsconfig.json
+.gitignore

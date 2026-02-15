@@ -1,5 +1,17 @@
 {
   "packages": {
+    "packages/tiny-font-ranges": {
+      "component": "tiny-font-ranges",
+      "release-type": "node",
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "jsr.json",
+          "jsonpath": "$.version"
+        }
+      ]
+    },
     "packages/tiny-png": {
       "component": "tiny-png",
       "release-type": "node",

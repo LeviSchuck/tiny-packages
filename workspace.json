@@ -1,5 +1,6 @@
 {
   "packages": [
+    "tiny-font-ranges",
     "tiny-html",
     "tiny-png",
     "tiny-qr",
