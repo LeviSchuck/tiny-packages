@@ -82,6 +82,10 @@ cp package.json "$NPM_BUILD_DIR/"
 cp README.md "$NPM_BUILD_DIR/" 2>/dev/null || true
 cp tsconfig.json "$NPM_BUILD_DIR/" 2>/dev/null || true
 cp vite.config.ts "$NPM_BUILD_DIR/" 2>/dev/null || true
+# Copy .npmrc for OIDC auth (from wherever setup-node placed it)
+if [ -n "$NPM_CONFIG_USERCONFIG" ] && [ -f "$NPM_CONFIG_USERCONFIG" ]; then
+  cp "$NPM_CONFIG_USERCONFIG" "$NPM_BUILD_DIR/.npmrc"
+fi
 
 # Change to npm_build directory
 cd "$NPM_BUILD_DIR"
@@ -115,8 +119,8 @@ fi
 
 # Build the package (prepublishOnly will also build, but this ensures dry-run works)
 echo "Publishing $NPM_PACKAGE_NAME to npm (version $LOCAL_VERSION)..."
-echo npm publish $DRY $PROV
-npm publish $DRY $PROV
+echo npm publish $DRY $PROV --access public
+npm publish $DRY $PROV --access public
 
 # Clean up
 cd "$PACKAGE_DIR"

@@ -1,5 +1,89 @@
 # Changelog
 
+## [1.3.12](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.11...tiny-packages-v1.3.12) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove debug logging from publish workflow ([e28058e](https://github.com/LeviSchuck/tiny-packages/commit/e28058e05ef6dffe1df158d715446d489e1ea599))
+
+## [1.3.11](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.10...tiny-packages-v1.3.11) (2026-02-15)
+
+
+### Bug Fixes
+
+* add OIDC debug logging to diagnose npm publish failure ([2190860](https://github.com/LeviSchuck/tiny-packages/commit/21908608e73432501072ff7fa542bd55b24c6da1))
+
+## [1.3.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.9...tiny-packages-v1.3.10) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to enable npm OIDC publishing ([f02288a](https://github.com/LeviSchuck/tiny-packages/commit/f02288a670c43f45ca3f9dfd00c58eb9e3675fed))
+
+## [1.3.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.8...tiny-packages-v1.3.9) (2026-02-15)
+
+
+### Bug Fixes
+
+* strip _authToken from NPM_CONFIG_USERCONFIG for OIDC fallback ([4921358](https://github.com/LeviSchuck/tiny-packages/commit/4921358f02d189e4da5bfe54101d101b3a62de95))
+
+## [1.3.8](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.7...tiny-packages-v1.3.8) (2026-02-15)
+
+
+### Bug Fixes
+
+* use NODE_AUTH_TOKEN="" inline for npm OIDC trusted publishing ([37abb49](https://github.com/LeviSchuck/tiny-packages/commit/37abb49925abc63fac6b1822b0fa56ae684be9ab))
+
+## [1.3.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.6...tiny-packages-v1.3.7) (2026-02-15)
+
+
+### Bug Fixes
+
+* use registry-url then strip _authToken line for OIDC fallback ([7db59f8](https://github.com/LeviSchuck/tiny-packages/commit/7db59f8cb6da970c9be58bb1979a11d52271b1df))
+
+## [1.3.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.5...tiny-packages-v1.3.6) (2026-02-15)
+
+
+### Bug Fixes
+
+* clear NODE_AUTH_TOKEN to prevent OIDC bypass ([a1bfbd2](https://github.com/LeviSchuck/tiny-packages/commit/a1bfbd212eb3e351c96149a09447645b82560020))
+
+## [1.3.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.4...tiny-packages-v1.3.5) (2026-02-15)
+
+
+### Bug Fixes
+
+* write .npmrc with registry only, no token placeholder ([a045193](https://github.com/LeviSchuck/tiny-packages/commit/a045193ed0b6bcf4611fb1310561077d6ba636f5))
+
+## [1.3.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.3...tiny-packages-v1.3.4) (2026-02-15)
+
+
+### Bug Fixes
+
+* restore registry-url for OIDC discovery and ensure npm &gt;= 11.5.1 ([857c306](https://github.com/LeviSchuck/tiny-packages/commit/857c3068c6d2d67e58990f502fb5d2fe387a94ae))
+
+## [1.3.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.2...tiny-packages-v1.3.3) (2026-02-15)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to allow OIDC auth fallback ([ef4b448](https://github.com/LeviSchuck/tiny-packages/commit/ef4b448a25dfbd62005af023bcb1e590578a1cb7))
+
+## [1.3.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.1...tiny-packages-v1.3.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* copy .npmrc into npm_build for OIDC auth discovery ([10be107](https://github.com/LeviSchuck/tiny-packages/commit/10be107d98c74445fc06a9019465e58500b2d34a))
+
+## [1.3.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.0...tiny-packages-v1.3.1) (2026-02-15)
+
+
+### Bug Fixes
+
+* use npm OIDC trusted publishing instead of static token ([1b426b5](https://github.com/LeviSchuck/tiny-packages/commit/1b426b59edf890fa425a2da761723af3a3f9648c))
+
 ## [1.3.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.2.2...tiny-packages-v1.3.0) (2026-02-15)
 
 
