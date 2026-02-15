@@ -32,6 +32,8 @@ jobs:
         run: bun install
       - name: Publish all packages to NPM
         run: ./scripts/publish-all-npm.sh
+        env:
+          NODE_AUTH_TOKEN: ""
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
       - name: Publish all packages to JSR
