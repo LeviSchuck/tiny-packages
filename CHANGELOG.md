@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.4.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.12...tiny-packages-v1.4.0) (2026-02-15)
+
+
+### Features
+
+* Add tiny-font-ranges package ([#25](https://github.com/LeviSchuck/tiny-packages/issues/25)) ([e95056b](https://github.com/LeviSchuck/tiny-packages/commit/e95056b68ab3f05ecba77ed3b09d00f61d5f21eb))
+* Indexed with automatic bit-depth ([5afafa5](https://github.com/LeviSchuck/tiny-packages/commit/5afafa54dc46419d86368e816207d5c70496fb08))
+* Read PNG Headers ([3a1d81e](https://github.com/LeviSchuck/tiny-packages/commit/3a1d81ef1b7376105fc4fa5c6c46cc923b8ee152))
+* Safe HTML sanitization ([59b6cc8](https://github.com/LeviSchuck/tiny-packages/commit/59b6cc809eb9324aaaceea00ebb8473b88fbc98f))
+
+
+### Bug Fixes
+
+* Add convenience htmlNodeToHtmlElement function ([ae46552](https://github.com/LeviSchuck/tiny-packages/commit/ae46552b54fdde5b0c5676fc203f4314fdd662de))
+* add documentation symbols ([d7ca32f](https://github.com/LeviSchuck/tiny-packages/commit/d7ca32f9062803334211e10b7aaa0b442face210))
+* Add getTextContent ([3743e73](https://github.com/LeviSchuck/tiny-packages/commit/3743e73221847cdc8fb0cd47e96c3a9e15c04d4e))
+* Add QR Code disclosure ([137ee1e](https://github.com/LeviSchuck/tiny-packages/commit/137ee1e690dd70127670d06f52b5f7b22a0264ec))
+* Add tiny-html ([632515c](https://github.com/LeviSchuck/tiny-packages/commit/632515c19a4918c8f32d79a21020cfc358eff14b))
+* Build tiny-png type-check ([82e19e0](https://github.com/LeviSchuck/tiny-packages/commit/82e19e0eba6a28f23dde7670d680a3a14ebee3eb))
+* Bump version ([71d49ed](https://github.com/LeviSchuck/tiny-packages/commit/71d49eddd4037f998969403ae5f5e2e40140d7b8))
+* Correct the bun to npm publish transition ([5058776](https://github.com/LeviSchuck/tiny-packages/commit/505877668bf0d6f5e87469442f595e0ee9fc4037))
+* Don't explode with builds ([e6a199d](https://github.com/LeviSchuck/tiny-packages/commit/e6a199d3c3fb84f8702aadcd74fca6c4c5349d5e))
+* Dynamically generate reed solomon codes ([f1b69a0](https://github.com/LeviSchuck/tiny-packages/commit/f1b69a001cd1f8685af1dc51ebc87f09e5759f93))
+* Exclude tsconfig ([7efc7ee](https://github.com/LeviSchuck/tiny-packages/commit/7efc7eed69749050d00f54ea2a70c5418379f3ac))
+* Export encode and decode html entities ([90c8f06](https://github.com/LeviSchuck/tiny-packages/commit/90c8f06a53c472cf559e3679466942e5706a87b7))
+* fix tests ([0684cc9](https://github.com/LeviSchuck/tiny-packages/commit/0684cc929725784ccf0c273e1c5b5ecc75e7cb0a))
+* Generalize type checking, add lints ([53fedf5](https://github.com/LeviSchuck/tiny-packages/commit/53fedf50034f23112b1b4703f031ed92f2b9449e))
+* Ignore JSR for now ([5855cd1](https://github.com/LeviSchuck/tiny-packages/commit/5855cd1e8816afd301aef6f5e2fedd4d74c074a6))
+* Introduce HTML Library ([#13](https://github.com/LeviSchuck/tiny-packages/issues/13)) ([5a9166d](https://github.com/LeviSchuck/tiny-packages/commit/5a9166dc23c5eede3680fab6b9c7d88bfb155fc9))
+* Limit publication to tiny-packages ([1abde1c](https://github.com/LeviSchuck/tiny-packages/commit/1abde1c90d2ec892313f7395ea3448845a1bb4ef))
+* Oops, use NPM not node ([020b28e](https://github.com/LeviSchuck/tiny-packages/commit/020b28e01a7b0406d73c2cb7ec1e901b12fa943f))
+* Publishing should come through JSR now ([facca89](https://github.com/LeviSchuck/tiny-packages/commit/facca894b6dc4fa080c7ba0717bda757fe06be09))
+* Remove unused env vars ([ea1af62](https://github.com/LeviSchuck/tiny-packages/commit/ea1af62fc74907ea2dc3a5f09f1ffdba9beda36d))
+* Try NPM_CONFIG_TOKEN for bun (why do you need to be special?) ([9480bd8](https://github.com/LeviSchuck/tiny-packages/commit/9480bd8e645d05d060ca3397d6a7551d892699d5))
+* Types ([5076b44](https://github.com/LeviSchuck/tiny-packages/commit/5076b443aa93642dae1ae726546652ae646973ae))
+* Types ([5e6cfcc](https://github.com/LeviSchuck/tiny-packages/commit/5e6cfcc2829044c8bad886e1639a2642478ddcc9))
+* Use NPM instead of bun for publishing ([03008ad](https://github.com/LeviSchuck/tiny-packages/commit/03008ad5aee5074a9a6522598fe1bdb69ee7571d))
+* use npm OIDC trusted publishing instead of static token ([f73d50a](https://github.com/LeviSchuck/tiny-packages/commit/f73d50ab5b676caa4dded86b29f594a9f101b114))
+* Use the same url as provenance ([414ed7c](https://github.com/LeviSchuck/tiny-packages/commit/414ed7ca496c30c63a2f6ebf83e8340d2b917614))
+
 ## [1.3.12](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.11...tiny-packages-v1.3.12) (2026-02-15)
 
 
