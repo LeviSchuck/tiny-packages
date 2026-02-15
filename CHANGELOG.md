@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.7](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.6...tiny-packages-v1.3.7) (2026-02-15)
+
+
+### Bug Fixes
+
+* use registry-url then strip _authToken line for OIDC fallback ([7db59f8](https://github.com/LeviSchuck/tiny-packages/commit/7db59f8cb6da970c9be58bb1979a11d52271b1df))
+
 ## [1.3.6](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.5...tiny-packages-v1.3.6) (2026-02-15)
 
 
