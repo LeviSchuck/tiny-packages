@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.0...tiny-packages-v1.3.1) (2026-02-15)
+
+
+### Bug Fixes
+
+* use npm OIDC trusted publishing instead of static token ([1b426b5](https://github.com/LeviSchuck/tiny-packages/commit/1b426b59edf890fa425a2da761723af3a3f9648c))
+
 ## [1.3.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.2.2...tiny-packages-v1.3.0) (2026-02-15)
 
 
