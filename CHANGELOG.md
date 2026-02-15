@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.5](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.4...tiny-packages-v1.3.5) (2026-02-15)
+
+
+### Bug Fixes
+
+* write .npmrc with registry only, no token placeholder ([a045193](https://github.com/LeviSchuck/tiny-packages/commit/a045193ed0b6bcf4611fb1310561077d6ba636f5))
+
 ## [1.3.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.3...tiny-packages-v1.3.4) (2026-02-15)
 
 
