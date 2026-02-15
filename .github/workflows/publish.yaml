@@ -24,12 +24,25 @@ jobs:
           node-version: '25'
       - name: Ensure npm >= 11.5.1 for OIDC
         run: npm install -g npm@latest
+      - name: Debug OIDC environment
+        run: |
+          echo "npm version: $(npm --version)"
+          echo "node version: $(node --version)"
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL set: ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN set: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+yes}"
+          npm config list
+          echo "---"
+          echo "All .npmrc files:"
+          cat ~/.npmrc 2>/dev/null || echo "No ~/.npmrc"
+          cat .npmrc 2>/dev/null || echo "No ./.npmrc"
+          echo "NPM_CONFIG_USERCONFIG: ${NPM_CONFIG_USERCONFIG:-not set}"
       - name: Install dependencies
         run: bun install
       - name: Publish all packages to NPM
         run: ./scripts/publish-all-npm.sh
         env:
           NODE_AUTH_TOKEN: ''
+          NPM_CONFIG_LOGLEVEL: verbose
       - name: Clean up after npm style
         run: ./scripts/clean-all-npm.sh
       - name: Publish all packages to JSR
