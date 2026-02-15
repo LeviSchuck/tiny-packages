@@ -22,6 +22,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '25'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Ensure npm >= 11.5.1 for OIDC
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: bun install
