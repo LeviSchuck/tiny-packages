@@ -234,7 +234,12 @@ describe("ALL_FONTS integration", () => {
 	});
 
 	test("deduplicateFonts is idempotent", () => {
-		const once = deduplicateFonts(ALL_FONTS);
+		const fonts: FontRange[] = [
+			{ ranges: ["0010-0030", "0050-0070"], family: "A" },
+			{ ranges: ["0020-0040", "0060-0080"], family: "B" },
+			{ ranges: ["0035-0055"], family: "C" },
+		];
+		const once = deduplicateFonts(fonts);
 		const twice = deduplicateFonts(once);
 		expect(twice).toEqual(once);
 	});

@@ -12,6 +12,7 @@ Intended to be compatible with [deno](https://deno.com/) and [node](https://node
 * `@levischuck/tiny-qr-svg` - Render QR codes to SVGs, again with as little javascript as possible
 * `@levischuck/tiny-qr-png` - Render QR codes to PNGs, you get the idea.
 * `@levischuck/tiny-html` - Read, Write, and Traverse HTML.
+* `@levischuck/tiny-font-ranges` - Unicode range data for Noto fonts with scanning and deduplication utilities.
 
 Other packages elsewhere:
 
