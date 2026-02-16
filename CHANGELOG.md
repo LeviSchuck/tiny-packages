@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.4.0...tiny-packages-v1.4.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* idempotency test timeout and add tiny-font-ranges to README ([9b92468](https://github.com/LeviSchuck/tiny-packages/commit/9b9246871841c68d0d71497aca39d2f13961c6d9))
+* Remove partial overlaps ([810c121](https://github.com/LeviSchuck/tiny-packages/commit/810c12133a92a0773beefacd72a4bf202d32b40b))
+
 ## [1.4.0](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.3.12...tiny-packages-v1.4.0) (2026-02-15)
 
 
