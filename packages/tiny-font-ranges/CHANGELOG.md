@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-font-ranges-v1.0.1...tiny-font-ranges-v1.0.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* Typescript 6 and 7 updates ([9c34d22](https://github.com/LeviSchuck/tiny-packages/commit/9c34d22ca15441dac3a213ccddee44283b558439))
+
 ## [1.0.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-font-ranges-v1.0.0...tiny-font-ranges-v1.0.1) (2026-02-16)
 
 

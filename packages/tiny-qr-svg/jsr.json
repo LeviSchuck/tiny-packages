@@ -1,6 +1,6 @@
 {
   "name": "@levischuck/tiny-qr-svg",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "exports": {
     ".": "./src/index.ts"
   },

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-svg-v0.0.9...tiny-qr-svg-v0.0.10) (2026-06-18)
+
+
+### Bug Fixes
+
+* Typescript 6 and 7 updates ([9c34d22](https://github.com/LeviSchuck/tiny-packages/commit/9c34d22ca15441dac3a213ccddee44283b558439))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @levischuck/tiny-qr bumped to 0.0.10
+
 ## [0.0.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-svg-v0.0.8...tiny-qr-svg-v0.0.9) (2026-01-15)
 
 
