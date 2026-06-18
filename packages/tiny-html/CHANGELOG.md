@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.1...tiny-html-v0.1.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* Typescript 6 and 7 updates ([9c34d22](https://github.com/LeviSchuck/tiny-packages/commit/9c34d22ca15441dac3a213ccddee44283b558439))
+
 ## [0.1.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.0...tiny-html-v0.1.1) (2026-01-12)
 
 

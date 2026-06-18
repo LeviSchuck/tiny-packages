@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.10](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.9...tiny-qr-v0.0.10) (2026-06-18)
+
+
+### Bug Fixes
+
+* Larger QR codes did not decode ([d91d44b](https://github.com/LeviSchuck/tiny-packages/commit/d91d44ba00f5fd3b6eea47dae03ac82f422ff214))
+* Typescript 6 and 7 updates ([9c34d22](https://github.com/LeviSchuck/tiny-packages/commit/9c34d22ca15441dac3a213ccddee44283b558439))
+
 ## [0.0.9](https://github.com/LeviSchuck/tiny-packages/compare/tiny-qr-v0.0.8...tiny-qr-v0.0.9) (2026-01-15)
 
 

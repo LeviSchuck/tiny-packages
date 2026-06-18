@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.4.1...tiny-packages-v1.4.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* Larger QR codes did not decode ([d91d44b](https://github.com/LeviSchuck/tiny-packages/commit/d91d44ba00f5fd3b6eea47dae03ac82f422ff214))
+* Typescript 6 and 7 updates ([9c34d22](https://github.com/LeviSchuck/tiny-packages/commit/9c34d22ca15441dac3a213ccddee44283b558439))
+
 ## [1.4.1](https://github.com/LeviSchuck/tiny-packages/compare/tiny-packages-v1.4.0...tiny-packages-v1.4.1) (2026-02-16)
 
 
