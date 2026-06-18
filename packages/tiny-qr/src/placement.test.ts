@@ -90,6 +90,24 @@ describe('Format Info Placement', () => {
 });
 
 describe('Version Info Placement (version >= 7)', () => {
+  test('version 7 QR code includes alignment patterns on timing row and column', () => {
+    const result = qrCode({ data: 'A'.repeat(155), ec: EcLevel.M });
+
+    expect(result.version).toBe(7);
+
+    const checkAlignmentPattern = (centerX: number, centerY: number) => {
+      for (let y = -2; y <= 2; y++) {
+        for (let x = -2; x <= 2; x++) {
+          const expected = Math.abs(x) === 2 || Math.abs(y) === 2 || (x === 0 && y === 0);
+          expect(result.matrix[centerY + y]![centerX + x]).toBe(expected);
+        }
+      }
+    };
+
+    checkAlignmentPattern(6, 22);
+    checkAlignmentPattern(22, 6);
+  });
+
   test('version 7 QR code has version info', () => {
     // Generate a QR code that requires version 7 or higher
     const longData = 'A'.repeat(200); // Should require version 7+

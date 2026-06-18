@@ -126,9 +126,17 @@ export function canvasDrawAllFunctionalPatterns(canvas: CanvasState): CanvasStat
 
   // Alignment patterns
   const positions = getAlignmentPatternPositions(canvas.version);
-  for (const y of positions) {
-    for (const x of positions) {
-      if (canvasGet(newCanvas, x, y) === Module.Empty) {
+  const lastAlignmentIndex = positions.length - 1;
+  for (let yIndex = 0; yIndex < positions.length; yIndex++) {
+    const y = positions[yIndex]!;
+    for (let xIndex = 0; xIndex < positions.length; xIndex++) {
+      const x = positions[xIndex]!;
+      const overlapsFinder =
+        (xIndex === 0 && yIndex === 0) ||
+        (xIndex === lastAlignmentIndex && yIndex === 0) ||
+        (xIndex === 0 && yIndex === lastAlignmentIndex);
+
+      if (!overlapsFinder) {
         newCanvas = drawAlignmentPattern(newCanvas, x, y);
       }
     }
@@ -445,4 +453,3 @@ function getVersionInfo(version: Version): number {
   ];
   return versions[version - 1] || 0;
 }
-
