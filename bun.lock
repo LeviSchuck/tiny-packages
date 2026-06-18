@@ -51,7 +51,7 @@
         "@types/bun": "^1.3.5",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
     "packages/tiny-html": {
@@ -61,7 +61,7 @@
         "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
     "packages/tiny-png": {
@@ -71,7 +71,7 @@
         "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
     "packages/tiny-qr": {
@@ -81,7 +81,7 @@
         "@types/bun": "^1.3.5",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
     "packages/tiny-qr-png": {
@@ -95,7 +95,7 @@
         "@types/bun": "^1.3.5",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
     "packages/tiny-qr-svg": {
@@ -108,7 +108,7 @@
         "@types/bun": "^1.3.5",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": ">=5 <8",
       },
     },
   },
