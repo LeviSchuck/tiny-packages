@@ -204,9 +204,8 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
               tagNameStart = i;
               i++;
             } else {
-              // Unknown, treat as text
-              textStart = i - 1;
-              state = 'TEXT' as ParserState;
+              state = 'BOGUS_COMMENT' as ParserState;
+              i++;
             }
           } else if (bytes[i + 1] === 0x5B && bytes[i + 2] === 0x43) {
             // Check for CDATA
@@ -216,12 +215,13 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
               textStart = i + 8;
               i += 8;
             } else {
-              textStart = i - 1;
-              state = 'TEXT' as ParserState;
+              state = 'BOGUS_COMMENT' as ParserState;
+              i++;
             }
           } else {
-            textStart = i - 1;
-            state = 'TEXT' as ParserState;
+            // Any other <! up to the next > is a comment, as browsers parse it (e.g. Outlook's <![endif]-->).
+            state = 'BOGUS_COMMENT' as ParserState;
+            i++;
           }
         } else if (byte === 0x3F) { // ?
           // Processing instruction
@@ -407,7 +407,8 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
         break;
 
       case 'ATTRIBUTE_VALUE_UNQUOTED' as ParserState:
-        if (isWhitespace(byte) || byte === 0x3E || byte === 0x2F) {
+        // Only whitespace or > ends an unquoted value; a / is part of it (src=https://x/y).
+        if (isWhitespace(byte) || byte === 0x3E) {
           const rawValue = decodeUtf8(bytes, attrValueStart, i);
           const value = decodeHtmlEntities(rawValue);
           const normalizedAttr = normalizeAttrName(currentAttrName, currentElement!.namespace);
@@ -433,6 +434,9 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
           state = 'TEXT' as ParserState;
           textStart = i + 1;
           i++;
+        } else if (currentElement) {
+          // A / not followed by > is ignored, as browsers do: <a / href=x>.
+          state = 'ATTRIBUTES' as ParserState;
         } else {
           textStart = tagNameStart - 1;
           state = 'TEXT' as ParserState;
@@ -478,6 +482,14 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
         } else {
           i++;
         }
+        break;
+
+      case 'BOGUS_COMMENT' as ParserState:
+        if (byte === 0x3E) { // >
+          state = 'TEXT' as ParserState;
+          textStart = i + 1;
+        }
+        i++;
         break;
 
       case 'DOCTYPE' as ParserState:

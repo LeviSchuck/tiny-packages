@@ -80,6 +80,37 @@ describe('Parser - Attributes', () => {
     } as unknown as HtmlNode);
   });
 
+  test('keeps slashes and colons in unquoted values', () => {
+    const result = readHtml('<a href=https://example.com/a/b style=color:red;margin:0>x</a>');
+    expect(result.node).toEqual({
+      type: 'a',
+      props: { href: 'https://example.com/a/b', style: { color: 'red', margin: '0' }, children: 'x' },
+    } as unknown as HtmlNode);
+  });
+
+  test('parses an unquoted URL on a void element', () => {
+    const result = readHtml('<div><img alt="Logo" height=34 src=https://example.com/logo.png title="Logo">after</div>');
+    expect(result.node).toEqual({
+      type: 'div',
+      props: {
+        children: [
+          { type: 'img', props: { alt: 'Logo', height: '34', src: 'https://example.com/logo.png', title: 'Logo' } },
+          'after',
+        ],
+      },
+    } as unknown as HtmlNode);
+  });
+
+  test('ends an unquoted value only at whitespace or >', () => {
+    expect((readHtml('<img src=a.png/>').node as any).props.src).toBe('a.png/');
+    expect((readHtml('<img src=a.png />').node as any).props.src).toBe('a.png');
+  });
+
+  test('ignores a stray slash between attributes', () => {
+    const result = readHtml('<a / href=x>y</a>');
+    expect(result.node).toEqual({ type: 'a', props: { href: 'x', children: 'y' } } as unknown as HtmlNode);
+  });
+
   test('converts class to className', () => {
     const result = readHtml('<div class="test"></div>');
     expect((result.node as any).props.className).toBe('test');
@@ -127,6 +158,16 @@ describe('Parser - Comments and Special', () => {
       type: 'div',
       props: { children: 'test' },
     } as unknown as HtmlNode);
+  });
+
+  test('discards a stray Outlook conditional end, as browsers do', () => {
+    const result = readHtml('<div>a<![endif]-->b<!-- x --><![if mso]>c</div>');
+    expect(result.node).toEqual({ type: 'div', props: { children: ['a', 'b', 'c'] } } as unknown as HtmlNode);
+  });
+
+  test('discards a downlevel-revealed conditional comment but keeps its content', () => {
+    const result = readHtml('<div><!--[if !mso]><!--><b>x</b><!--<![endif]--></div>');
+    expect(result.node).toEqual({ type: 'div', props: { children: { type: 'b', props: { children: 'x' } } } } as unknown as HtmlNode);
   });
 
   test('handles CDATA sections', () => {
