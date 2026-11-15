@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.2...tiny-html-v0.1.3) (2026-11-15)
+
+
+### Bug Fixes
+
+* **tiny-html:** keep slashes in unquoted attribute values and ignore &lt;!...&gt; markup as browsers do ([b71eb91](https://github.com/LeviSchuck/tiny-packages/commit/b71eb9122925d0e6d8fd2e5a896079dd549abd89))
+
 ## [0.1.2](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.1...tiny-html-v0.1.2) (2026-06-18)
 
 
