@@ -2,6 +2,8 @@ on:
   release:
     types:
       - published
+  # Re-run a publish that failed (each package skips versions already on npm/JSR).
+  workflow_dispatch:
 
 name: publish
 
@@ -13,17 +15,18 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
       - name: Set up node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '25'
+          node-version: '24'
       - name: Ensure npm >= 11.5.1 for OIDC
-        run: npm install -g npm@latest
+        # Pinned to a major that supports this Node; npm@latest can drop support for it.
+        run: npm install -g npm@^11.5.1
       - name: Install dependencies
         run: bun install
       - name: Publish all packages to NPM
