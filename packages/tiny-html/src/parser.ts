@@ -134,6 +134,16 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
     // No matching open tag found, ignore stray closing tag
   }
 
+  /** A start tag being read, its attributes still to come. */
+  function startElement(tagName: string): ElementStackEntry {
+    // Attributes of svg and math are in their namespace.
+    const tagLower = tagName.toLowerCase();
+    const namespace = tagLower === 'svg' ? 'SVG' as Namespace :
+                      tagLower === 'math' ? 'MATHML' as Namespace :
+                      currentNamespace;
+    return { type: tagName, props: {}, children: [], namespace };
+  }
+
   function openTag(tagName: string, props: Partial<HtmlProps>, selfClosing: boolean): void {
     const normalizedName = normalizeTagName(tagName, currentNamespace);
 
@@ -247,18 +257,7 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
 
       case 'TAG_NAME' as ParserState:
         if (isWhitespace(byte)) {
-          const tagName = decodeUtf8(bytes, tagNameStart, i);
-          // Determine namespace for this element's attributes
-          const tagLower = tagName.toLowerCase();
-          const attrNamespace = (tagLower === 'svg') ? 'SVG' as Namespace :
-                                (tagLower === 'math') ? 'MATHML' as Namespace :
-                                currentNamespace;
-          currentElement = {
-            type: tagName,
-            props: {},
-            children: [],
-            namespace: attrNamespace,
-          };
+          currentElement = startElement(decodeUtf8(bytes, tagNameStart, i));
           state = 'ATTRIBUTES' as ParserState;
           i++;
         } else if (byte === 0x3E) { // >
@@ -279,6 +278,8 @@ export function parseHtml(html: string, options: ParserOptions = {}): ParseResul
           }
           i++;
         } else if (byte === 0x2F) { // /
+          // The name ends here too: <br/>, <a/ href=x>.
+          currentElement = startElement(decodeUtf8(bytes, tagNameStart, i));
           state = 'TAG_CLOSE_SELF' as ParserState;
           i++;
         } else if (isNameChar(byte)) {
