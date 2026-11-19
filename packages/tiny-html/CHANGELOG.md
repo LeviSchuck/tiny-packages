@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.3...tiny-html-v0.1.4) (2026-11-19)
+
+
+### Bug Fixes
+
+* **tiny-html:** parse self-closing tags without a space and out-of-range character references ([#43](https://github.com/LeviSchuck/tiny-packages/issues/43)) ([4a36c07](https://github.com/LeviSchuck/tiny-packages/commit/4a36c0786e0325e0e27de97d91948b778bea5942))
+
 ## [0.1.3](https://github.com/LeviSchuck/tiny-packages/compare/tiny-html-v0.1.2...tiny-html-v0.1.3) (2026-11-15)
 
 
