@@ -17,12 +17,10 @@ export function decodeHtmlEntities(text: string): string {
   return text.replace(/&(?:#[xX]([0-9a-fA-F]+)|#(\d+)|([a-zA-Z][a-zA-Z0-9]*));/g, (match, hex, dec, named) => {
     if (hex) {
       // Hexadecimal entity: &#x3C; or &#X3C;
-      const code = parseInt(hex, 16);
-      return String.fromCodePoint(code);
+      return codePointToString(parseInt(hex, 16));
     } else if (dec) {
       // Decimal entity: &#60;
-      const code = parseInt(dec, 10);
-      return String.fromCodePoint(code);
+      return codePointToString(parseInt(dec, 10));
     } else if (named && HTML_ENTITIES[named]) {
       // Named entity: &lt;, &gt;, etc.
       return HTML_ENTITIES[named];
@@ -30,6 +28,12 @@ export function decodeHtmlEntities(text: string): string {
     // Unknown entity, return as-is
     return match;
   });
+}
+
+/** As browsers decode a numeric reference: 0, surrogates and anything past U+10FFFF become U+FFFD. */
+function codePointToString(code: number): string {
+  if (!Number.isFinite(code) || code === 0 || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) return '\uFFFD';
+  return String.fromCodePoint(code);
 }
 
 /**

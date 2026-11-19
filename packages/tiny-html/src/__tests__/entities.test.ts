@@ -109,3 +109,14 @@ describe('Round-trip Encoding/Decoding', () => {
     expect(decodeHtmlEntities(encoded)).toBe('&lt;');
   });
 });
+
+describe('Entity Decoding - invalid code points', () => {
+  test('decodes references browsers replace to U+FFFD instead of throwing', () => {
+    expect(decodeHtmlEntities('&#x110000;')).toBe('�');
+    expect(decodeHtmlEntities('&#1114112;')).toBe('�');
+    expect(decodeHtmlEntities('&#0;')).toBe('�');
+    expect(decodeHtmlEntities('&#xD800;')).toBe('�');
+    expect(decodeHtmlEntities('&#99999999999999999999;')).toBe('�');
+    expect(decodeHtmlEntities('&#x10FFFF;')).toBe('\u{10FFFF}');
+  });
+});

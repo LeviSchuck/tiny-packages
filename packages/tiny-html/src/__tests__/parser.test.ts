@@ -368,3 +368,21 @@ describe('Parser - Attribute Naming Options', () => {
     expect((result.node as any).props.id).toBe('my-input');
   });
 });
+
+describe('Parser - Self-closing tags without a space', () => {
+  test('parses <br/> and other names followed directly by /', () => {
+    expect(readHtml('<br/>').node).toEqual({ type: 'br', props: {} });
+    expect(readHtml('a<br/>b').node).toEqual(['a', { type: 'br', props: {} }, 'b']);
+    expect(readHtml('<p>a<br/>b</p>').node).toEqual({ type: 'p', props: { children: ['a', { type: 'br', props: {} }, 'b'] } });
+    expect(readHtml('<img/>').node).toEqual({ type: 'img', props: {} });
+    expect(readHtml('<x-y/>').node).toEqual({ type: 'x-y', props: {} });
+  });
+
+  test('keeps parsing attributes after a / that does not close the tag', () => {
+    expect(readHtml('<a/ href="x">l</a>').node).toEqual({ type: 'a', props: { href: 'x', children: 'l' } });
+  });
+
+  test('keeps svg attributes in their namespace', () => {
+    expect(readHtml('<svg/>').node).toEqual(readHtml('<svg />').node);
+  });
+});
